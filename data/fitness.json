@@ -1,0 +1,36 @@
+{
+  "weeklyGoal": {
+    "runs": 3,
+    "gymSessions": 4,
+    "totalKm": 15
+  },
+  "currentWeek": {
+    "runsCompleted": 2,
+    "gymCompleted": 3,
+    "totalKm": 9.5
+  },
+  "lastRun": {
+    "date": "2025-02-20",
+    "distance": 4.2,
+    "time": "24:30",
+    "pace": "5:50/km",
+    "calories": 320
+  },
+  "lastGym": {
+    "date": "2025-02-19",
+    "type": "Upper Body",
+    "exercises": [
+      { "name": "Bench Press", "sets": 4, "reps": "8-10" },
+      { "name": "Overhead Press", "sets": 3, "reps": "10" },
+      { "name": "Dumbbell Rows", "sets": 4, "reps": "12" },
+      { "name": "Lateral Raises", "sets": 3, "reps": "15" }
+    ]
+  },
+  "monthlyProgress": {
+    "currentKm": 38,
+    "goalKm": 60,
+    "currentSessions": 14,
+    "goalSessions": 20
+  },
+  "workoutStreak": 5
+}

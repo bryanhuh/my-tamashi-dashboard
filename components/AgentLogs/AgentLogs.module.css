@@ -1,0 +1,122 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.terminal {
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.terminalHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--border);
+}
+
+.dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.terminalTitle {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.terminalBody {
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.logEntry {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.logEntry:last-child {
+    border-bottom: none;
+}
+
+.logHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-align: left;
+    transition: background var(--duration-fast) var(--ease-out);
+}
+
+.logHeader:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.logStatus {
+    font-size: 0.6rem;
+    flex-shrink: 0;
+}
+
+.logDate {
+    color: var(--text-muted);
+    flex-shrink: 0;
+    font-size: 0.6rem;
+}
+
+.logTitle {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-primary);
+}
+
+.logDetails {
+    padding: 0 16px 16px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    animation: fadeIn 0.3s var(--ease-out);
+}
+
+.logMeta {
+    display: flex;
+    gap: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+}
+
+.logMeta strong {
+    color: var(--accent-light);
+    font-weight: 500;
+}
+
+.logSummary {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.logTags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}

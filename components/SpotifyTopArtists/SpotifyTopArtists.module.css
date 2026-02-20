@@ -1,0 +1,116 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.active {
+    border-color: var(--spotify) !important;
+    color: var(--spotify) !important;
+    background: rgba(29, 185, 84, 0.08) !important;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.artistCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    position: relative;
+    transition: all var(--duration-fast) var(--ease-out);
+    text-decoration: none;
+}
+
+.artistCard:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+}
+
+.rank {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+}
+
+.artistImg {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 2px;
+    filter: grayscale(20%);
+    transition: filter var(--duration-fast) var(--ease-out);
+}
+
+.artistCard:hover .artistImg {
+    filter: grayscale(0%);
+}
+
+.artistImgPlaceholder {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-subtle);
+    border-radius: 2px;
+    color: var(--text-muted);
+}
+
+.artistInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.artistName {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.setup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 32px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.setupIcon {
+    opacity: 0.3;
+}
+
+.skeletonImg {
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+.skeletonName {
+    width: 80%;
+    height: 14px;
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Building Tamashi Dashboard",
+    "category": "coding",
+    "progress": 35,
+    "status": "active",
+    "description": "Personal digital HQ with obake.blue-inspired design"
+  },
+  {
+    "id": 2,
+    "title": "Claude Code Agentic Workflows",
+    "category": "learning",
+    "progress": 60,
+    "status": "active",
+    "description": "Mastering MCP, subagents, and autonomous coding agents"
+  },
+  {
+    "id": 3,
+    "title": "Elden Ring: Shadow of the Erdtree",
+    "category": "gaming",
+    "progress": 45,
+    "status": "active",
+    "description": "Exploring the Land of Shadow, collecting all remembrances"
+  },
+  {
+    "id": 4,
+    "title": "5K Running Goal",
+    "category": "fitness",
+    "progress": 70,
+    "status": "active",
+    "description": "Training to run 5K under 25 minutes consistently"
+  },
+  {
+    "id": 5,
+    "title": "System Design Fundamentals",
+    "category": "learning",
+    "progress": 25,
+    "status": "paused",
+    "description": "Studying distributed systems, CAP theorem, and scalability patterns"
+  }
+]

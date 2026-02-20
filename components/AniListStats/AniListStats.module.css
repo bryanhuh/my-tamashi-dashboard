@@ -1,0 +1,123 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 14px 8px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    text-align: center;
+}
+
+.statIcon {
+    color: var(--anilist);
+    font-size: 0.9rem;
+}
+
+.statValue {
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.statLabel {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.watching {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.watchingLabel {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 4px;
+}
+
+.watchingItem {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.watchingItem:hover {
+    border-color: var(--border-hover);
+}
+
+.watchingImg {
+    width: 36px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.watchingInfo {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.watchingTitle {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.watchingProgress {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--anilist);
+}
+
+.profileLink {
+    align-self: flex-start;
+    color: var(--anilist);
+    border-color: rgba(61, 180, 242, 0.2);
+}
+
+.profileLink:hover {
+    border-color: var(--anilist);
+    background: rgba(61, 180, 242, 0.08);
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 24px 0;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}

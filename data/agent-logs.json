@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "date": "2025-02-20",
+    "title": "Tamashi Dashboard — Multi-Agent Page Builder",
+    "status": "success",
+    "model": "Claude 3.5 Sonnet",
+    "agent": "Browser + Code Agent",
+    "tags": ["Next.js", "Dashboard", "Multi-Agent"],
+    "summary": "Used agentic workflow to build a complete personal dashboard. The agent researched an inspiration site (obake.blue), created a design system, and built 14 components autonomously."
+  },
+  {
+    "id": 2,
+    "date": "2025-02-18",
+    "title": "Food App UI Revamp — Agentic Redesign",
+    "status": "success",
+    "model": "Claude 3.5 Sonnet",
+    "agent": "Code Agent",
+    "tags": ["React", "UI/UX", "Glassmorphism"],
+    "summary": "Complete UI overhaul using agentic coding. Implemented dark aesthetic with glassmorphism, Framer Motion animations, and responsive design across 12+ pages."
+  },
+  {
+    "id": 3,
+    "date": "2025-02-15",
+    "title": "SEO Meta Tags + Dynamic Sitemap via Agent",
+    "status": "success",
+    "model": "Claude 3.5 Sonnet",
+    "agent": "Code Agent",
+    "tags": ["SEO", "Meta Tags", "Sitemap"],
+    "summary": "Agent implemented OpenGraph meta tags with react-helmet-async and created a dynamic sitemap endpoint. Required understanding of SSR vs CSR rendering."
+  },
+  {
+    "id": 4,
+    "date": "2025-02-12",
+    "title": "Login Persistence Bug — Agent Debugging Session",
+    "status": "success",
+    "model": "Claude 3.5 Sonnet",
+    "agent": "Code Agent",
+    "tags": ["Debugging", "Auth", "Sessions"],
+    "summary": "Debugged session persistence issue where verify_keycloak session variable persisted after tab close. Agent identified sessionStorage vs localStorage distinction."
+  },
+  {
+    "id": 5,
+    "date": "2025-02-10",
+    "title": "MCP Server Exploration — Tool Discovery",
+    "status": "in-progress",
+    "model": "Claude 3.5 Sonnet",
+    "agent": "Research Agent",
+    "tags": ["MCP", "Tools", "Protocol"],
+    "summary": "Exploring how MCP servers expose tools to AI models. Building a custom MCP server for database queries and API proxying."
+  },
+  {
+    "id": 6,
+    "date": "2025-02-08",
+    "title": "Multi-Agent Code Review Pipeline",
+    "status": "failed",
+    "model": "GPT-4 Turbo",
+    "agent": "Multi-Agent",
+    "tags": ["Code Review", "Pipeline", "CI/CD"],
+    "summary": "Attempted to build an automated code review pipeline using multiple agents. Failed due to context window limitations when reviewing large PRs. Need chunking strategy."
+  }
+]

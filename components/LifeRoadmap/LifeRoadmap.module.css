@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-left: 24px;
+}
+
+.line {
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+}
+
+.milestone {
+    position: relative;
+    padding: 12px 0 12px 20px;
+    animation: fadeInUp 0.5s var(--ease-out) both;
+}
+
+.dot {
+    position: absolute;
+    left: -24px;
+    top: 18px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--bg-base);
+    z-index: 1;
+}
+
+.done .dot {
+    background: var(--accent);
+}
+
+.in-progress .dot {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.year {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+.status {
+    font-size: 0.75rem;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.planned .title {
+    color: var(--text-secondary);
+}
+
+.description {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}

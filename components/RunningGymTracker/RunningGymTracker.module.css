@@ -1,0 +1,149 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.streakBanner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    border-radius: 2px;
+    background: rgba(255, 107, 53, 0.04);
+}
+
+.flameIcon {
+    color: var(--fire);
+}
+
+.streakCount {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--fire);
+    letter-spacing: 0.05em;
+}
+
+.weekStats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.weekStat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+}
+
+.statIcon {
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.statInfo {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.statValue {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.statGoal {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+}
+
+.lastSession {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sessionLabel {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.sessionGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.sessionItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 10px 4px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+}
+
+.sessionValue {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.sessionKey {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.exercises {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.exercise {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+}
+
+.exerciseName {
+    color: var(--text-secondary);
+}
+
+.exerciseDetail {
+    color: var(--accent-light);
+    font-weight: 500;
+}
+
+.monthly {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.monthlyLabel {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+}

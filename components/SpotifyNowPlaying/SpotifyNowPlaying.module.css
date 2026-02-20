@@ -1,0 +1,165 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.player {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.artWrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.art {
+    width: 80px;
+    height: 80px;
+    border-radius: 2px;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+}
+
+.artGlow {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: -4px;
+    bottom: -4px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(20px);
+    opacity: 0.4;
+    border-radius: 2px;
+}
+
+.info {
+    flex: 1;
+    min-width: 0;
+}
+
+.track {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+}
+
+.artist {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--spotify);
+    margin-bottom: 2px;
+}
+
+.album {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+}
+
+.progressContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.timestamps {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+}
+
+.openLink {
+    align-self: flex-start;
+    margin-top: 4px;
+    color: var(--spotify);
+    border-color: rgba(29, 185, 84, 0.2);
+}
+
+.openLink:hover {
+    border-color: var(--spotify);
+    background: rgba(29, 185, 84, 0.08);
+    color: var(--spotify);
+}
+
+.notPlaying {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 0;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+}
+
+.icon {
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.setup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 24px 0;
+    text-align: center;
+}
+
+.setupIcon {
+    color: var(--text-muted);
+    opacity: 0.3;
+}
+
+.setupText {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.setupHint {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+}
+
+.skeleton {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.skeletonArt {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.skeletonInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skeletonTitle {
+    width: 70%;
+    height: 16px;
+}
+
+.skeletonArtist {
+    width: 50%;
+    height: 12px;
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "How Claude Code's Agentic Workflow Actually Works",
+    "excerpt": "A deep dive into how Claude Code orchestrates multi-step coding tasks — from task decomposition to file editing, terminal commands, and self-verification loops.",
+    "category": "AI Agents",
+    "tags": ["Claude", "Agentic", "Coding"],
+    "date": "2025-02-18",
+    "readTime": "8 min",
+    "content": "Claude Code represents a paradigm shift in how we interact with AI for software development. Unlike traditional code completion tools that suggest the next line, Claude Code operates as a full autonomous agent — it reads your codebase, plans changes across multiple files, executes terminal commands, and verifies its own work. The key breakthrough is the agentic loop: Plan → Execute → Verify → Iterate. Each step feeds context back into the next, allowing the agent to self-correct. This is fundamentally different from single-shot prompting."
+  },
+  {
+    "id": 2,
+    "title": "MCP (Model Context Protocol): The Bridge Between AI and Your Tools",
+    "excerpt": "Understanding how MCP enables AI models to interact with external tools, APIs, and data sources — and why it's the future of agent architectures.",
+    "category": "Infrastructure",
+    "tags": ["MCP", "Protocol", "Tools"],
+    "date": "2025-02-15",
+    "readTime": "6 min",
+    "content": "The Model Context Protocol (MCP) solves one of the biggest challenges in AI agent development: how do you give an LLM access to the real world? MCP provides a standardized protocol for AI models to discover and use external tools. Think of it like USB for AI — a universal interface that lets models connect to databases, APIs, file systems, and more. The protocol defines tool schemas, handles authentication, manages context windows, and provides structured I/O. This means you can build tools once and have them work across different AI models and frameworks."
+  },
+  {
+    "id": 3,
+    "title": "Building AI Agents with Subagents: A Practical Guide",
+    "excerpt": "How to architect multi-agent systems where specialized subagents handle distinct tasks — from browser automation to code analysis to file management.",
+    "category": "AI Agents",
+    "tags": ["Subagents", "Architecture", "Multi-Agent"],
+    "date": "2025-02-10",
+    "readTime": "10 min",
+    "content": "The most powerful AI agent systems aren't monolithic — they're composed of specialized subagents, each with their own tools and context. A browser subagent handles web interactions, a code subagent manages file editing, a research subagent handles information gathering. The orchestrator agent delegates tasks, collects results, and synthesizes them into coherent actions. This architecture mirrors how effective engineering teams work: specialized roles coordinating toward a common goal. The key challenges are context passing, error handling across agent boundaries, and knowing when to delegate vs. handle directly."
+  },
+  {
+    "id": 4,
+    "title": "LLM Context Management: What Actually Matters",
+    "excerpt": "Strategies for managing context windows effectively — from RAG to sliding windows to hierarchical summarization — and what I've learned from building with LLMs.",
+    "category": "LLM",
+    "tags": ["Context", "RAG", "Optimization"],
+    "date": "2025-02-05",
+    "readTime": "7 min",
+    "content": "Context is king in LLM applications, but context windows are finite. The art of building effective AI systems comes down to choosing what goes into the context window. RAG (Retrieval Augmented Generation) fetches relevant documents at query time. Sliding windows keep recent conversation history while summarizing older messages. Hierarchical summarization creates layered abstractions of long conversations. The most underrated technique is structured context injection — instead of dumping raw text, you format context with clear headers, relevance scores, and metadata so the model can quickly identify what matters."
+  },
+  {
+    "id": 5,
+    "title": "My AI Agent Experiment Stack: Tools, Frameworks, and Lessons",
+    "excerpt": "A walkthrough of the tools and frameworks I use for AI agent experiments — Claude, GPT-4, LangChain, CrewAI — and the lessons learned from building with each.",
+    "category": "Experiments",
+    "tags": ["Tools", "Frameworks", "Experiments"],
+    "date": "2025-01-28",
+    "readTime": "9 min",
+    "content": "After months of building AI agent experiments, here's my honest assessment of the ecosystem. Claude excels at complex reasoning and code generation — it's my go-to for agentic coding workflows. GPT-4 is still the most versatile for general-purpose agent tasks. LangChain provides incredible flexibility but can be over-engineered for simple use cases. CrewAI shines for multi-agent orchestration with clear role definitions. The biggest lesson: the framework matters less than the prompt engineering and tool design. A well-designed tool with a clear schema will outperform a complex framework with poorly defined tools every time."
+  }
+]

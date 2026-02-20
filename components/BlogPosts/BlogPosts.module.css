@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.post {
+    padding: 20px;
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: background var(--duration-fast) var(--ease-out);
+    animation: fadeInUp 0.5s var(--ease-out) both;
+    cursor: default;
+}
+
+.post:hover {
+    background: var(--bg-card-hover);
+}
+
+.post+.post {
+    border-top: 1px solid var(--border);
+}
+
+.postMeta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.postDate {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+}
+
+.postRead {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.postTitle {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.postExcerpt {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.postFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
