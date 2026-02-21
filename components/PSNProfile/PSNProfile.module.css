@@ -1,118 +1,409 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
 }
 
-.gameHeader {
+/* ── Profile Header ── */
+.header {
     display: flex;
+    align-items: flex-start;
     gap: 14px;
-    align-items: center;
 }
 
-.gameImg {
-    width: 64px;
-    height: 64px;
-    border-radius: 2px;
+.avatarWrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid var(--psn);
     object-fit: cover;
-    border: 1px solid var(--border);
+    box-shadow: 0 0 16px rgba(0, 55, 145, 0.4);
 }
 
-.gameInfo {
+.avatarFallback {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid var(--psn);
+    background: rgba(0, 55, 145, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--psn);
+}
+
+.statusDot {
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--bg-base);
+}
+
+.online {
+    background: #00c853;
+    box-shadow: 0 0 6px rgba(0, 200, 83, 0.8);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.offline {
+    background: var(--text-muted);
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 6px rgba(0, 200, 83, 0.8);
+    }
+
+    50% {
+        box-shadow: 0 0 12px rgba(0, 200, 83, 1);
+    }
+}
+
+.headerInfo {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 6px;
+    min-width: 0;
 }
 
-.gameTitle {
-    font-family: var(--font-display);
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.progress {
+.usernameRow {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.progressLabel {
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--text-muted);
-}
-
-.progressValue {
-    color: var(--psn);
-    font-weight: 500;
-}
-
-.trophies {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
     gap: 8px;
 }
 
-.trophy {
+.username {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.levelBadge {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--psn);
+    background: rgba(0, 55, 145, 0.12);
+    border: 1px solid rgba(0, 55, 145, 0.25);
+    padding: 2px 7px;
+    border-radius: 100px;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+}
+
+.statusRow {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+}
+
+.statusIcon {
+    color: #00c853;
+    flex-shrink: 0;
+}
+
+.statusIconOff {
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.statusOnline {
+    color: #00c853;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.statusOffline {
+    color: var(--text-muted);
+}
+
+.levelProgress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.levelProgressLabel {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--psn);
+    white-space: nowrap;
+}
+
+.profileLink {
+    flex-shrink: 0;
+    color: var(--psn);
+    border-color: rgba(0, 55, 145, 0.25);
+    padding: 6px 10px;
+}
+
+.profileLink:hover {
+    border-color: var(--psn);
+    background: rgba(0, 55, 145, 0.1);
+    color: #4a7fd4;
+}
+
+/* ── Trophy Bar ── */
+.trophyBar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.trophyItem {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
     padding: 10px 6px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
+    border-right: 1px solid var(--border);
+    transition: background var(--duration-fast) var(--ease-out);
+}
+
+.trophyItem:last-child {
+    border-right: none;
+}
+
+.trophyItem:hover {
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .trophyIcon {
-    font-size: 1.1rem;
+    font-size: 0.85rem;
+    line-height: 1;
 }
 
 .trophyCount {
     font-family: var(--font-mono);
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.95rem;
+    font-weight: 700;
     color: var(--text-primary);
+    line-height: 1;
 }
 
 .trophyLabel {
     font-family: var(--font-mono);
-    font-size: 0.55rem;
+    font-size: 0.52rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
 
-.profileLink {
-    align-self: flex-start;
-    color: var(--psn);
-    border-color: rgba(0, 55, 145, 0.3);
+.trophyDivider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
 }
 
-.profileLink:hover {
-    border-color: var(--psn);
-    background: rgba(0, 55, 145, 0.08);
+.trophyTotal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 10px 14px;
 }
 
+/* ── Recent Games ── */
+.gamesSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gamesSectionLabel {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.gamesStrip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+}
+
+.gameCard {
+    position: relative;
+    aspect-ratio: 1 / 1.3;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    cursor: default;
+    transition: transform var(--duration-fast) var(--ease-out),
+        border-color var(--duration-fast) var(--ease-out),
+        box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.gameCard:hover {
+    transform: translateY(-3px) scale(1.03);
+    border-color: rgba(0, 55, 145, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.gameCard:hover .gameOverlay {
+    opacity: 1;
+}
+
+.gameCard:hover .gameArt {
+    filter: brightness(0.35);
+}
+
+.gameArt {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter var(--duration-fast) var(--ease-out);
+}
+
+.gameArtFallback {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+.gameOverlay {
+    position: absolute;
+    inset: 0;
+    padding: 8px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.gameName {
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.gameMeta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.gameMeta .tag {
+    font-size: 0.48rem;
+    padding: 2px 5px;
+    color: rgba(0, 55, 145, 0.9);
+    border-color: rgba(0, 55, 145, 0.4);
+    background: rgba(0, 55, 145, 0.15);
+}
+
+.gameTime {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    color: var(--text-muted);
+}
+
+.gameHours {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: rgba(0, 55, 145, 0.9);
+}
+
+/* ── Skeleton Loaders ── */
+.skeletonHeader {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.skeletonAvatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.skeletonHeaderText {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skeletonName {
+    height: 16px;
+    width: 120px;
+}
+
+.skeletonStatus {
+    height: 10px;
+    width: 80px;
+}
+
+.skeletonTrophies {
+    display: flex;
+    gap: 6px;
+}
+
+.skeletonTrophyItem {
+    flex: 1;
+    height: 60px;
+}
+
+.skeletonGames {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+}
+
+.skeletonGameItem {
+    aspect-ratio: 1 / 1.3;
+}
+
+/* ── Empty State ── */
 .empty {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 24px 0;
+    gap: 8px;
+    padding: 28px 0;
     color: var(--text-muted);
     font-size: 0.75rem;
+    font-family: var(--font-mono);
 }
 
 .emptyIcon {
-    opacity: 0.3;
-}
-
-.loadingState {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    opacity: 0.25;
 }

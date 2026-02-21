@@ -1,85 +1,118 @@
+/**
+ * PSN API Route — Rich Profile Data
+ *
+ * Fetches profile, presence, trophy summary, and recent games in parallel.
+ *
+ * SETUP (one-time):
+ * 1. Log in to https://www.playstation.com in your browser
+ * 2. In the same browser, open: https://ca.account.sony.com/api/v1/ssocookie
+ * 3. Copy the `npsso` value (64-char token)
+ * 4. Add to .env.local:
+ *    PSN_NPSSO=your_64_char_token_here
+ *    PSN_USERNAME=your_psn_username
+ *
+ * NPSSO token lasts ~2 months — repeat steps 1-3 when expired.
+ */
+
 import { NextResponse } from 'next/server';
-import * as cheerio from 'cheerio';
+import {
+  exchangeNpssoForAccessCode,
+  exchangeCodeForAccessToken,
+  getUserTrophyProfileSummary,
+  getProfileFromUserName,
+  getBasicPresence,
+  getUserPlayedGames,
+} from 'psn-api';
 
 const PSN_USERNAME = process.env.PSN_USERNAME || 'bryxnhuh';
+const PSN_NPSSO = process.env.PSN_NPSSO;
+
+async function getAuth() {
+  const accessCode = await exchangeNpssoForAccessCode(PSN_NPSSO);
+  const authorization = await exchangeCodeForAccessToken(accessCode);
+  return authorization;
+}
 
 export async function GET() {
+  if (!PSN_NPSSO) {
+    return NextResponse.json({ needsSetup: true });
+  }
+
   try {
-    const response = await fetch(`https://psnprofiles.com/${PSN_USERNAME}`, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      },
-      next: { revalidate: 21600 }, // Cache for 6 hours
-    });
+    const auth = await getAuth();
 
-    if (!response.ok) {
-      throw new Error(`PSNProfiles returned ${response.status}`);
-    }
+    // Fetch everything in parallel
+    const [profileRes, presenceRes, trophyRes, gamesRes] = await Promise.allSettled([
+      getProfileFromUserName(auth, PSN_USERNAME),
+      getBasicPresence(auth, PSN_USERNAME),
+      getUserTrophyProfileSummary(auth, 'me'),
+      getUserPlayedGames(auth, 'me', { limit: 5 }),
+    ]);
 
-    const html = await response.text();
-    const $ = cheerio.load(html);
+    // Profile
+    const profile = profileRes.status === 'fulfilled' ? profileRes.value?.profile : null;
+    const avatarUrl = profile?.avatarUrls?.[profile.avatarUrls.length - 1]?.avatarUrl ?? null;
+    const onlineId = profile?.onlineId ?? PSN_USERNAME;
 
-    // Extract trophy counts
+    // Presence
+    const presence = presenceRes.status === 'fulfilled' ? presenceRes.value?.basicPresence : null;
+    const isOnline = presence?.availability === 'availableToPlay';
+    const currentGame = presence?.gameTitleInfoList?.[0]?.titleName ?? null;
+
+    // Trophies
+    const trophyData = trophyRes.status === 'fulfilled' ? trophyRes.value : null;
     const trophies = {
-      platinum: parseInt($('.platinum').first().text().trim()) || 0,
-      gold: parseInt($('.gold').first().text().trim()) || 0,
-      silver: parseInt($('.silver').first().text().trim()) || 0,
-      bronze: parseInt($('.bronze').first().text().trim()) || 0,
+      platinum: trophyData?.earnedTrophies?.platinum ?? 0,
+      gold: trophyData?.earnedTrophies?.gold ?? 0,
+      silver: trophyData?.earnedTrophies?.silver ?? 0,
+      bronze: trophyData?.earnedTrophies?.bronze ?? 0,
     };
+    const trophyLevel = trophyData?.trophyLevel ?? null;
+    const trophyLevelProgress = trophyData?.progress ?? 0;
 
-    // Extract recent game
-    let recentGame = null;
-    const gameRow = $('#gamesTable tr, .game-table-container table tr, #game-table tr').first();
-    
-    if (gameRow.length) {
-      const gameLink = gameRow.find('a.title').first();
-      const gameImg = gameRow.find('img').first();
-      const progressText = gameRow.find('.progress-bar .percentage, .progress span').first().text().trim();
-      const platformEl = gameRow.find('.tag.platform, .platform').first();
+    // Recent games (up to 5)
+    const gamesData = gamesRes.status === 'fulfilled' ? gamesRes.value : null;
+    const recentGames = (gamesData?.titles ?? []).slice(0, 5).map((g) => ({
+      id: g.titleId,
+      name: g.name,
+      image: g.imageUrl ?? null,
+      platform: g.category ?? 'PS5',
+      playCount: g.playCount ?? null,
+      playDuration: g.playDuration ?? null,
+      firstPlayedAt: g.firstPlayedDateTime ?? null,
+      lastPlayedAt: g.lastPlayedDateTime ?? null,
+    }));
 
-      recentGame = {
-        title: gameLink.text().trim() || 'Unknown Game',
-        image: gameImg.attr('src') || '',
-        trophyProgress: parseInt(progressText) || 0,
-        platform: platformEl.text().trim() || 'PS5',
-      };
-    }
-
-    // Fallback: try to get the recent game from a different selector
-    if (!recentGame || !recentGame.title || recentGame.title === 'Unknown Game') {
-      const recentGameEl = $('.recent-game, .game-image-holder').first();
-      if (recentGameEl.length) {
-        recentGame = {
-          title: recentGameEl.find('.title, .game-title, a').first().text().trim() || 'Recent Game',
-          image: recentGameEl.find('img').first().attr('src') || '',
-          trophyProgress: parseInt(recentGameEl.find('.progress, .completion').first().text()) || 0,
-          platform: 'PS5',
-        };
+    return NextResponse.json(
+      {
+        username: onlineId,
+        avatarUrl,
+        isOnline,
+        currentGame,
+        trophies,
+        trophyLevel,
+        trophyLevelProgress,
+        recentGames,
+      },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+        },
       }
-    }
-
-    // If still no game, provide a minimal response
-    if (!recentGame) {
-      recentGame = {
-        title: 'Check PSN Profile',
-        image: '',
-        trophyProgress: 0,
-        platform: 'PS5',
-      };
-    }
-
-    return NextResponse.json({
-      username: PSN_USERNAME,
-      trophies,
-      recentGame,
-    });
+    );
   } catch (error) {
-    console.error('PSN scraping error:', error);
+    console.error('PSN API error:', error?.message || error);
     return NextResponse.json({
       username: PSN_USERNAME,
+      avatarUrl: null,
+      isOnline: false,
+      currentGame: null,
       trophies: { platinum: 0, gold: 0, silver: 0, bronze: 0 },
-      recentGame: null,
-      error: 'Failed to scrape PSN profile',
+      trophyLevel: null,
+      trophyLevelProgress: 0,
+      recentGames: [],
+      error: 'Failed to fetch PSN data',
+      detail: error?.message,
     });
   }
 }
