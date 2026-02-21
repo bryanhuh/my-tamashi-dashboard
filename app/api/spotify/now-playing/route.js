@@ -53,14 +53,26 @@ export async function GET() {
   }
 
   try {
-    const { access_token } = await getAccessToken();
+    const tokenData = await getAccessToken();
+    const { access_token } = tokenData;
+
+    if (!access_token) {
+      console.error('Spotify token error:', tokenData);
+      return NextResponse.json({ isPlaying: false, error: 'Token fetch failed', detail: tokenData });
+    }
 
     const response = await fetch(NOW_PLAYING_ENDPOINT, {
       headers: { Authorization: `Bearer ${access_token}` },
     });
 
-    if (response.status === 204 || response.status > 400) {
+    if (response.status === 204) {
       return NextResponse.json({ isPlaying: false });
+    }
+
+    if (response.status >= 400) {
+      const errBody = await response.json().catch(() => ({}));
+      console.error('Spotify API error:', response.status, errBody);
+      return NextResponse.json({ isPlaying: false, error: `Spotify ${response.status}`, detail: errBody });
     }
 
     const song = await response.json();
@@ -81,6 +93,6 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Spotify error:', error);
-    return NextResponse.json({ isPlaying: false, error: 'Failed to fetch' });
+    return NextResponse.json({ isPlaying: false, error: 'Failed to fetch', detail: error.message });
   }
 }
