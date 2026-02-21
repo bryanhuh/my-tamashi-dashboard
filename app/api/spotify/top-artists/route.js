@@ -37,7 +37,7 @@ export async function GET(request) {
     const { access_token } = await getAccessToken();
 
     const response = await fetch(
-      `${TOP_ARTISTS_ENDPOINT}?time_range=${range}&limit=8`,
+      `${TOP_ARTISTS_ENDPOINT}?time_range=${range}&limit=20`,
       { headers: { Authorization: `Bearer ${access_token}` } }
     );
 

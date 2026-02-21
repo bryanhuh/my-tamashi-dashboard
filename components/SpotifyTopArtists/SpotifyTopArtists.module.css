@@ -1,101 +1,449 @@
+/* ── Outer shell ── */
 .container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
 }
 
-.controls {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.active {
-    border-color: var(--spotify) !important;
-    color: var(--spotify) !important;
-    background: rgba(29, 185, 84, 0.08) !important;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
-}
-
-.artistCard {
+/* ── Header row ── */
+.header {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 12px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    position: relative;
-    transition: all var(--duration-fast) var(--ease-out);
-    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 24px;
 }
 
-.artistCard:hover {
-    border-color: var(--border-hover);
-    background: var(--bg-card-hover);
-    transform: translateY(-2px);
+/* ── Intro copy ── */
+.introContainer {
+    margin-top: 16px;
+    margin-bottom: 8px;
 }
 
-.rank {
+.intro {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.introHighlight {
+    color: var(--accent);
+    font-style: italic;
+}
+
+/* ── Staggered block filter card ── */
+.filterCard {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    color: var(--text-muted);
-    letter-spacing: 0.1em;
+    top: 24px;
+    right: 24px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
-.artistImg {
+.filterItem {
+    display: block;
+    text-align: left;
+    padding: 9px 16px;
+    padding-left: calc(12px + var(--indent, 0px));
+    font-family: var(--font-serif);
+    font-size: 0.98rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+}
+
+.filterItem:last-child {
+    border-bottom: none;
+}
+
+.filterItem:hover {
+    background: #e0e8ff;
+    /* light blue */
+    color: var(--accent);
+}
+
+.filterActive {
+    color: #ffffff !important;
+    background: var(--accent) !important;
+    font-weight: 600;
+}
+
+/* ── Constellation field ── */
+.field {
+    position: relative;
     width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    border-radius: 2px;
-    filter: grayscale(20%);
-    transition: filter var(--duration-fast) var(--ease-out);
+    height: 560px;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
-.artistCard:hover .artistImg {
-    filter: grayscale(0%);
-}
-
-.artistImgPlaceholder {
+/* ── Canvas background ── */
+.canvas {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    aspect-ratio: 1;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* ── ASCII Overlay ── */
+.asciiOverlay {
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--accent-subtle);
-    border-radius: 2px;
-    color: var(--text-muted);
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.62rem;
+    line-height: 1.18;
+    letter-spacing: 0.04em;
+
+    /* Soft cobalt blue text, sitting behind stars */
+    color: var(--accent);
+    opacity: 0.22;
+
+    pointer-events: none;
+    user-select: none;
+    white-space: pre;
+    overflow: hidden;
+    z-index: 1;
+
+    animation: globeFadeIn 1.5s ease both;
 }
 
-.artistInfo {
+@keyframes globeFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.22;
+    }
+}
+
+/* ── Artist Image Corner Overlay ── */
+.artistCornerContainer {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    width: 250px;
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+    animation: globeFadeIn 1.5s ease both;
+    opacity: 0.85;
+}
+
+/* ── SVG connection lines ── */
+.linesSvg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.connectionLine {
+    animation: dashDraw 0.35s ease forwards;
+}
+
+@keyframes dashDraw {
+    from {
+        opacity: 0;
+        stroke-dashoffset: 60;
+    }
+
+    to {
+        opacity: 1;
+        stroke-dashoffset: 0;
+    }
+}
+
+/* ── Central identity node ── */
+.central {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centralRing1,
+.centralRing2 {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    animation: centralPulse 3s ease-in-out infinite;
+}
+
+.centralRing2 {
+    inset: -12px;
+    border-color: rgba(255, 255, 255, 0.2);
+    animation-delay: 1.5s;
+}
+
+@keyframes centralPulse {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: scale(1.18);
+    }
+}
+
+.centralCore {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
+    border: 1px solid rgba(255, 255, 255, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--accent);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.8);
+    z-index: 1;
+}
+
+/* ── Artist star nodes ── */
+.star {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    overflow: visible;
+    /* let label overflow */
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 4;
+
+    /* Floating animation driven by CSS custom props */
+    animation:
+        starFloat var(--float-dur, 3.5s) ease-in-out infinite var(--float-delay, 0s),
+        starFadeIn 0.5s ease both;
+    transition: transform 0.25s var(--ease-out), z-index 0s;
+}
+
+.star:hover,
+.starHovered {
+    transform: translate(-50%, calc(-50% - 15px)) scale(1.25) !important;
+    animation-play-state: paused;
+    /* Pause float so hover scale is stable */
+    z-index: 20;
+}
+
+@keyframes starFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes starFloat {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) translateY(0px);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) translateY(-7px);
+    }
+}
+
+/* Photo fills the circle */
+.starImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    filter: grayscale(30%) brightness(0.8);
+    transition: filter 0.25s ease;
+}
+
+.star:hover .starImg,
+.starHovered .starImg {
+    filter: grayscale(0%) brightness(1);
+}
+
+/* Placeholder */
+.starPlaceholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(29, 185, 84, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(29, 185, 84, 0.5);
+}
+
+/* Glowing ring around each star */
+.starRing {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid rgba(180, 210, 255, 0.18);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    pointer-events: none;
+}
+
+/* Map pin pointer tail */
+.starRing::after {
+    content: '';
+    position: absolute;
+    bottom: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid rgba(180, 210, 255, 0.18);
+    transition: border-top-color 0.25s ease;
+    pointer-events: none;
+}
+
+.starHovered .starRing,
+.star:hover .starRing {
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.5), 0 0 28px rgba(255, 255, 255, 0.2);
+}
+
+.starHovered .starRing::after,
+.star:hover .starRing::after {
+    border-top-color: rgba(255, 255, 255, 0.9);
+}
+
+.starConnected .starRing {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+}
+
+.starConnected .starRing::after {
+    border-top-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Hover info label — floats below star */
+.starLabel {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
-    gap: 6px;
-}
-
-.artistName {
-    font-family: var(--font-display);
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--text-primary);
+    align-items: center;
+    gap: 2px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
+.star:hover .starLabel,
+.starHovered .starLabel {
+    opacity: 1;
+}
+
+.starName {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+    display: block;
+}
+
+.starGenre {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: var(--accent);
+    display: block;
+}
+
+/* Rank badge in top-right of each star */
+.starRank {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 4px;
+    z-index: 6;
+    pointer-events: none;
+}
+
+/* ── Loading overlay ── */
+.loadingOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    z-index: 10;
+}
+
+.loadingIcon {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Setup state ── */
 .setup {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    padding: 32px 0;
+    padding: 48px 0;
     text-align: center;
     color: var(--text-muted);
     font-size: 0.75rem;
@@ -103,14 +451,4 @@
 
 .setupIcon {
     opacity: 0.3;
-}
-
-.skeletonImg {
-    width: 100%;
-    aspect-ratio: 1;
-}
-
-.skeletonName {
-    width: 80%;
-    height: 14px;
 }

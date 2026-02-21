@@ -1,0 +1,478 @@
+/* ── Backdrop ── */
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    z-index: 100;
+    transition: all 0.4s ease;
+    animation: backdropFadeIn 0.4s ease forwards;
+}
+
+.backdrop.fadeOut {
+    animation: backdropFadeOut 0.4s ease forwards;
+}
+
+@keyframes backdropFadeIn {
+    to {
+        background: rgba(13, 13, 26, 0.4);
+        backdrop-filter: blur(4px);
+    }
+}
+
+@keyframes backdropFadeOut {
+    from {
+        background: rgba(13, 13, 26, 0.4);
+        backdrop-filter: blur(4px);
+    }
+
+    to {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+}
+
+/* ── Drawer Container ── */
+.drawer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(24px);
+    border-right: 1px solid var(--border);
+    box-shadow: 20px 0 40px rgba(0, 0, 0, 0.1);
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.slideIn {
+    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.slideOut {
+    animation: slideOutLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* ── Close Button ── */
+.closeBtn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.closeBtn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: scale(1.05);
+}
+
+/* ── Content Layout ── */
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.detailsScroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 24px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Custom Scrollbar */
+.detailsScroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.detailsScroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.detailsScroll::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+/* ── Hero Section ── */
+.hero {
+    position: relative;
+    padding: 64px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.heroBg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(30px) opacity(0.3);
+    z-index: -2;
+}
+
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.9) 80%, rgba(255, 255, 255, 1) 100%);
+    z-index: -1;
+}
+
+.artistPhoto {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 16px 32px rgba(43, 0, 255, 0.15);
+    border: 4px solid white;
+    margin-bottom: 20px;
+}
+
+.heroInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.artistName {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.statsRow {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.statPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(43, 0, 255, 0.08);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.genres {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.genreTag {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.playBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(43, 0, 255, 0.3);
+}
+
+.playBtn:hover {
+    background: #3d14ff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(43, 0, 255, 0.4);
+}
+
+/* ── Sections ── */
+.sectionTitle {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: normal;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+}
+
+/* ── Top Tracks ── */
+.tracksList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.trackRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.trackRow:hover {
+    background: var(--bg-card);
+}
+
+.trackNum {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    width: 16px;
+    text-align: right;
+}
+
+.trackImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.trackInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.trackName {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.trackAlbum {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.trackTime {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ── Latest Releases ── */
+.releaseGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.releaseCard {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 0.2s ease;
+}
+
+.releaseCard:hover {
+    transform: translateY(-4px);
+}
+
+.releaseImg {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.releaseName {
+    font-weight: 500;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    color: var(--text-primary);
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.releaseType {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+}
+
+/* ── Fans Also Like (Horizontal Scroll) ── */
+.relatedScroll {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    margin-right: -24px;
+    padding-right: 24px;
+}
+
+.relatedScroll::-webkit-scrollbar {
+    height: 4px;
+}
+
+.relatedScroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.relatedScroll::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+.relatedCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 80px;
+    flex-shrink: 0;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.relatedCard:hover {
+    transform: scale(1.05);
+}
+
+.relatedImg {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.relatedPlaceholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+.relatedName {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.2;
+}
+
+/* ── States ── */
+.loadingState,
+.errorState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 40px;
+    text-align: center;
+    gap: 20px;
+    color: var(--text-muted);
+}
+
+.skeletonHero {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--bg-card) 25%, var(--border) 50%, var(--bg-card) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.skeletonContent {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, var(--bg-card) 25%, var(--border) 50%, var(--bg-card) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    animation-delay: 0.2s;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
