@@ -1,5 +1,9 @@
 'use client';
 
+// WallpaperBackground is temporarily disabled in favour of the light #E5E5E5 theme.
+// To re-enable: uncomment everything below and remove the empty export.
+
+/*
 import { useState, useEffect } from 'react';
 import styles from './WallpaperBackground.module.css';
 
@@ -43,4 +47,9 @@ export default function WallpaperBackground() {
       <div className={styles.vignette} />
     </div>
   );
+}
+*/
+
+export default function WallpaperBackground() {
+  return null;
 }

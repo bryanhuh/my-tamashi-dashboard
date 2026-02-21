@@ -22,57 +22,43 @@ export default function Home() {
 
       {/* ── Hero: Clock + Quote ── */}
       <section className={styles.hero}>
-        <div className={styles.heroGlow} />
         <DigitalClock />
         <QuoteOfTheDay />
       </section>
 
-      {/* ── Main Grid ── */}
+      {/* ── Stagger Grid ── */}
       <div className={styles.mainGrid}>
-        {/* Row 1: Spotify */}
-        <div className={styles.section}>
+        <div className={`${styles.section} ${styles.spotifyNow}`}>
           <SpotifyNowPlaying />
         </div>
-        <div className={styles.section}>
+        <div className={`${styles.section} ${styles.spotifyArtists}`}>
           <SpotifyTopArtists />
         </div>
-
-        {/* Row 2: Gaming + Anime */}
-        <div className={styles.section}>
+        <div className={`${styles.section} ${styles.psn}`}>
           <PSNProfile />
         </div>
-        <div className={styles.section}>
+        <div className={`${styles.section} ${styles.anilist}`}>
           <AniListStats />
         </div>
-
-        {/* Row 3: Goals + Streak */}
-        <div className={styles.section}>
+        <div className={`${styles.section} ${styles.roadmap}`}>
           <LifeRoadmap />
         </div>
-        <div className={styles.section}>
+        <div className={`${styles.section} ${styles.streak}`}>
           <TaskStreak />
         </div>
-
-        {/* Row 4: Grinding + Fitness */}
-        <div className={styles.section}>
+        <div className={`${styles.section} ${styles.grinding}`}>
           <CurrentlyGrinding />
         </div>
-        <div className={styles.section}>
+        <div className={`${styles.section} ${styles.fitness}`}>
           <RunningGymTracker />
         </div>
-
-        {/* Row 5: Blog (full width) */}
-        <div className={`${styles.section} ${styles.fullWidth}`}>
+        <div className={`${styles.section} ${styles.blog}`}>
           <BlogPosts />
         </div>
-
-        {/* Row 6: Agent Logs (full width) */}
-        <div className={`${styles.section} ${styles.fullWidth}`}>
+        <div className={`${styles.section} ${styles.logs}`}>
           <AgentLogs />
         </div>
-
-        {/* Row 7: BuyMeACoffee (full width) */}
-        <div className={`${styles.section} ${styles.fullWidth}`}>
+        <div className={`${styles.section} ${styles.coffee}`}>
           <BuyMeACoffee />
         </div>
       </div>

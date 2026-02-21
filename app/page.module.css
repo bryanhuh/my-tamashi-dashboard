@@ -10,122 +10,131 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 50vh;
-  padding: 60px 24px 40px;
+  min-height: 42vh;
+  padding: 60px 48px 48px;
   position: relative;
   gap: 8px;
+  border-bottom: 1px solid var(--border);
 }
 
-.heroGlow {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(43, 0, 255, 0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
+/* ── Stagger Grid ── */
+/*
+  3-column grid, auto rows, align-self:start on every card
+  so height = content only, never inflated.
 
-/* ── Main Grid ── */
+  Column spans create the offset/magazine feel:
+  Col 1 = narrow left
+  Col 2 = wide centre
+  Col 3 = narrow right
+
+  Sections that start in the same row as the one above (e.g. AniList
+  next to PSN) naturally "half-hang" because column heights differ.
+*/
 .mainGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gap);
+  grid-template-columns: 1fr 1.6fr 1fr;
+  gap: 0;
   padding: 0;
   border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
 }
 
-.mainGrid>* {
-  padding: var(--card-padding);
+/* Every section: content-height, no fixed min-height */
+.section {
   background: var(--bg-card);
   border-right: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  transition: background var(--duration-normal) var(--ease-out);
+  padding: var(--card-padding);
+  align-self: start;
+  animation: fadeInUp 0.5s var(--ease-out) both;
+  transition: background var(--duration-fast) var(--ease-out);
 }
 
-.mainGrid>*:hover {
+.section:hover {
   background: var(--bg-card-hover);
 }
 
-.mainGrid>*:nth-child(2n) {
-  border-right: none;
-}
+/* ── Individual grid placements ── */
 
-/* ── Full Width Sections ── */
-.fullWidth {
-  grid-column: 1 / -1;
-  border-right: none !important;
-}
-
-/* ── Section Entrance Animation ── */
-.section {
-  animation: fadeInUp 0.6s var(--ease-out) both;
-}
-
-.section:nth-child(1) {
+/* Spotify Now Playing — narrow left */
+.spotifyNow {
+  grid-column: 1 / 2;
   animation-delay: 0.05s;
 }
 
-.section:nth-child(2) {
+/* Spotify Top Artists — spans centre + right */
+.spotifyArtists {
+  grid-column: 2 / 4;
   animation-delay: 0.1s;
 }
 
-.section:nth-child(3) {
+/* PSN Profile — spans left + centre (wide) */
+.psn {
+  grid-column: 1 / 3;
   animation-delay: 0.15s;
 }
 
-.section:nth-child(4) {
+/* AniList — right column, starts at PSN's row (stagger effect) */
+.anilist {
+  grid-column: 3 / 4;
+  animation-delay: 0.18s;
+}
+
+/* Life Roadmap — spans centre + right */
+.roadmap {
+  grid-column: 2 / 4;
   animation-delay: 0.2s;
 }
 
-.section:nth-child(5) {
+/* Task Streak — narrow left */
+.streak {
+  grid-column: 1 / 2;
+  animation-delay: 0.22s;
+}
+
+/* Currently Grinding — narrow left + centre */
+.grinding {
+  grid-column: 1 / 3;
   animation-delay: 0.25s;
 }
 
-.section:nth-child(6) {
-  animation-delay: 0.3s;
+/* Running / Gym — right */
+.fitness {
+  grid-column: 3 / 4;
+  animation-delay: 0.28s;
 }
 
-.section:nth-child(7) {
-  animation-delay: 0.35s;
+/* Full-width bottom sections */
+.blog,
+.logs,
+.coffee {
+  grid-column: 1 / 4;
+  animation-delay: 0.32s;
 }
 
-.section:nth-child(8) {
+.logs {
+  animation-delay: 0.36s;
+}
+
+.coffee {
   animation-delay: 0.4s;
-}
-
-.section:nth-child(9) {
-  animation-delay: 0.45s;
-}
-
-.section:nth-child(10) {
-  animation-delay: 0.5s;
-}
-
-.section:nth-child(11) {
-  animation-delay: 0.55s;
-}
-
-.section:nth-child(12) {
-  animation-delay: 0.6s;
 }
 
 /* ── Footer ── */
 .footer {
   border-top: 1px solid var(--border);
-  padding: 32px 24px;
+  padding: 32px 48px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .footerLeft {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 400;
   color: var(--text-muted);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .footerRight {
@@ -137,20 +146,59 @@
 
 .footerAccent {
   color: var(--accent);
+  font-style: italic;
 }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .mainGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .mainGrid>* {
-    border-right: none;
+  .spotifyNow,
+  .spotifyArtists,
+  .psn,
+  .anilist,
+  .roadmap,
+  .streak,
+  .grinding,
+  .fitness {
+    grid-column: auto;
+  }
+
+  .blog,
+  .logs,
+  .coffee {
+    grid-column: 1 / 3;
   }
 
   .hero {
-    min-height: 40vh;
-    padding: 40px 16px 24px;
+    padding: 48px 24px 40px;
+  }
+
+  .footer {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+    border-left: none;
+  }
+
+  .section {
+    border-right: none;
+  }
+
+  .blog,
+  .logs,
+  .coffee {
+    grid-column: 1;
+  }
+
+  .hero {
+    min-height: 36vh;
+    padding: 40px 20px 32px;
   }
 }
