@@ -5,6 +5,8 @@ const ANILIST_USERNAME = process.env.ANILIST_USERNAME || 'breezarre';
 const ANILIST_QUERY = `
 query ($username: String) {
   User(name: $username) {
+    id
+    name
     avatar {
       medium
     }
@@ -22,19 +24,29 @@ query ($username: String) {
       }
     }
   }
-  MediaListCollection(userName: $username, type: ANIME, status: CURRENT) {
-    lists {
-      entries {
+}
+`;
+
+const ACTIVITY_QUERY = `
+query ($userId: Int, $page: Int) {
+  Page(page: $page, perPage: 10) {
+    activities(userId: $userId, sort: ID_DESC) {
+      ... on ListActivity {
+        id
+        type
+        status
         progress
+        createdAt
         media {
           title {
             english
             romaji
           }
-          episodes
+          type
           coverImage {
             medium
           }
+          siteUrl
         }
       }
     }
@@ -44,23 +56,21 @@ query ($username: String) {
 
 export async function GET() {
   try {
-    const response = await fetch('https://graphql.anilist.co', {
+    // Step 1: Fetch user stats + user ID
+    const userRes = await fetch('https://graphql.anilist.co', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         query: ANILIST_QUERY,
         variables: { username: ANILIST_USERNAME },
       }),
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      next: { revalidate: 3600 },
     });
 
-    const json = await response.json();
-    const userData = json.data?.User;
-    const listData = json.data?.MediaListCollection;
+    const userJson = await userRes.json();
+    const userData = userJson.data?.User;
 
-    if (!userData) {
-      throw new Error('User not found');
-    }
+    if (!userData) throw new Error('User not found');
 
     const animeStats = userData.statistics?.anime || {};
     const mangaStats = userData.statistics?.manga || {};
@@ -69,37 +79,54 @@ export async function GET() {
       animeCount: animeStats.count || 0,
       mangaCount: mangaStats.count || 0,
       meanScore: animeStats.meanScore || 0,
-      daysWatched: ((animeStats.minutesWatched || 0) / 60 / 24),
+      daysWatched: (animeStats.minutesWatched || 0) / 60 / 24,
       episodesWatched: animeStats.episodesWatched || 0,
       chaptersRead: mangaStats.chaptersRead || 0,
     };
 
-    // Currently watching
-    const watching = [];
-    const lists = listData?.lists || [];
-    for (const list of lists) {
-      for (const entry of list.entries || []) {
-        watching.push({
-          title: entry.media.title.english || entry.media.title.romaji,
-          progress: entry.progress,
-          episodes: entry.media.episodes,
-          coverImage: entry.media.coverImage?.medium,
-        });
-      }
-    }
+    // Step 2: Fetch recent activity with user ID
+    const activityRes = await fetch('https://graphql.anilist.co', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query: ACTIVITY_QUERY,
+        variables: { userId: userData.id, page: 1 },
+      }),
+      next: { revalidate: 1800 }, // Cache 30 min for activity
+    });
+
+    const activityJson = await activityRes.json();
+    const rawActivities = activityJson.data?.Page?.activities ?? [];
+
+    const activity = rawActivities
+      .filter((a) => a?.media) // Only ListActivity with a media item
+      .slice(0, 6)
+      .map((a) => ({
+        id: a.id,
+        type: a.type,         // ANIME_LIST or MANGA_LIST
+        status: a.status,     // "watched episode", "completed", "plans to watch", etc.
+        progress: a.progress, // e.g. "5" or "1 - 5"
+        createdAt: a.createdAt,
+        media: {
+          title: a.media.title.english || a.media.title.romaji,
+          type: a.media.type,
+          coverImage: a.media.coverImage?.medium,
+          siteUrl: a.media.siteUrl,
+        },
+      }));
 
     return NextResponse.json({
-      username: ANILIST_USERNAME,
+      username: userData.name,
       avatar: userData.avatar?.medium,
       stats,
-      watching: watching.slice(0, 5),
+      activity,
     });
   } catch (error) {
     console.error('AniList error:', error);
     return NextResponse.json({
       username: ANILIST_USERNAME,
       stats: null,
-      watching: [],
+      activity: [],
       error: 'Failed to fetch AniList data',
     });
   }

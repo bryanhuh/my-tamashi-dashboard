@@ -46,7 +46,7 @@ export async function GET() {
       getProfileFromUserName(auth, PSN_USERNAME),
       getBasicPresence(auth, PSN_USERNAME),
       getUserTrophyProfileSummary(auth, 'me'),
-      getUserPlayedGames(auth, 'me', { limit: 5 }),
+      getUserPlayedGames(auth, 'me', { limit: 20 }),
     ]);
 
     // Profile
@@ -70,9 +70,26 @@ export async function GET() {
     const trophyLevel = trophyData?.trophyLevel ?? null;
     const trophyLevelProgress = trophyData?.progress ?? 0;
 
-    // Recent games (up to 5)
+    // Known non-game apps to exclude
+    const EXCLUDED_APPS = [
+      'Spotify', 'YouTube', 'Netflix', 'Disney+', 'Apple TV',
+      'Amazon Prime Video', 'Twitch', 'Crunchyroll', 'Plex',
+      'Hulu', 'Peacock', 'HBO Max', 'Max', 'Paramount+',
+      'Disney Plus', 'Apple TV+', 'DAZN', 'ESPN',
+    ];
+
+    // Recent games (up to 5, filtered to actual games)
     const gamesData = gamesRes.status === 'fulfilled' ? gamesRes.value : null;
-    const recentGames = (gamesData?.titles ?? []).slice(0, 5).map((g) => ({
+    const recentGames = (gamesData?.titles ?? [])
+      .filter((g) => {
+        // Exclude PS apps by category
+        if (g.category === 'ps-app' || g.category === 'psApp') return false;
+        // Exclude known media apps by name
+        if (EXCLUDED_APPS.some((app) => g.name?.toLowerCase().includes(app.toLowerCase()))) return false;
+        return true;
+      })
+      .slice(0, 5)
+      .map((g) => ({
       id: g.titleId,
       name: g.name,
       image: g.imageUrl ?? null,
