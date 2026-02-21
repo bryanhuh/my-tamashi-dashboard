@@ -1,0 +1,38 @@
+.globe {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+
+    /* Monospace so every char is the same width */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.62rem;
+    line-height: 1.18;
+    letter-spacing: 0.04em;
+
+    /* Dim it so it sits behind the hero content */
+    color: var(--accent, #7c9cbf);
+    opacity: 0.18;
+
+    /* Don't intercept clicks / hover on the real content */
+    pointer-events: none;
+    user-select: none;
+    white-space: pre;
+    overflow: hidden;
+
+    /* Fade in on mount */
+    animation: globeFadeIn 1.2s ease both;
+}
+
+@keyframes globeFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.18;
+    }
+}

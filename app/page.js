@@ -14,6 +14,7 @@ import BlogPosts from '@/components/BlogPosts/BlogPosts';
 import AgentLogs from '@/components/AgentLogs/AgentLogs';
 import RunningGymTracker from '@/components/RunningGymTracker/RunningGymTracker';
 import BuyMeACoffee from '@/components/BuyMeACoffee/BuyMeACoffee';
+import ASCIIGlobe from '@/components/ASCIIGlobe/ASCIIGlobe';
 
 export default function Home() {
   return (
@@ -22,15 +23,17 @@ export default function Home() {
 
       {/* ── Hero: Clock + Quote ── */}
       <section className={styles.hero}>
+        <ASCIIGlobe />
         <DigitalClock />
         <QuoteOfTheDay />
+        <div className={styles.spotifyWidget}>
+          <SpotifyNowPlaying />
+        </div>
       </section>
 
       {/* ── Stagger Grid ── */}
       <div className={styles.mainGrid}>
-        <div className={`${styles.section} ${styles.spotifyNow}`}>
-          <SpotifyNowPlaying />
-        </div>
+
         <div className={`${styles.section} ${styles.spotifyArtists}`}>
           <SpotifyTopArtists />
         </div>

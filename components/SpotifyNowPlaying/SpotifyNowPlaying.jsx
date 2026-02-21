@@ -45,7 +45,6 @@ export default function SpotifyNowPlaying() {
   if (loading) {
     return (
       <div className={styles.container}>
-        <div className="sectionIndex">01 — Spotify</div>
         <div className={styles.skeleton}>
           <div className={`skeleton ${styles.skeletonArt}`} />
           <div className={styles.skeletonInfo}>
@@ -62,7 +61,18 @@ export default function SpotifyNowPlaying() {
 
   return (
     <div className={styles.container}>
-      <div className="sectionIndex">01 — Now Playing</div>
+      {data?.songUrl && (
+        <a
+          href={data.songUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.spotifyIconLink}
+          aria-label="Open in Spotify"
+        >
+          <ExternalLink size={11} />
+          <span className={styles.tooltip}>Open in Spotify</span>
+        </a>
+      )}
       
       {needsSetup ? (
         <div className={styles.setup}>
@@ -94,11 +104,7 @@ export default function SpotifyNowPlaying() {
               <span>{formatTime(data.durationMs)}</span>
             </div>
           </div>
-          {data.songUrl && (
-            <a href={data.songUrl} target="_blank" rel="noopener noreferrer" className={`pill ${styles.openLink}`}>
-              <ExternalLink size={12} /> Open in Spotify
-            </a>
-          )}
+
         </>
       ) : (
         <div className={styles.notPlaying}>

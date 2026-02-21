@@ -11,7 +11,8 @@
   align-items: center;
   justify-content: center;
   min-height: 42vh;
-  padding: 60px 48px 48px;
+  padding: 140px 48px 48px;
+  /* top padding clears the absolute Spotify widget (~60px) + gap */
   position: relative;
   gap: 8px;
   border-bottom: 1px solid var(--border);
@@ -56,16 +57,35 @@
 
 /* ── Individual grid placements ── */
 
-/* Spotify Now Playing — narrow left */
-.spotifyNow {
-  grid-column: 1 / 2;
-  animation-delay: 0.05s;
+/* ── Spotify Widget (hero top-center, Dynamic Island style) ── */
+.spotifyWidget {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* slightly softer border */
+  border-radius: 32px;
+  /* Pill shape */
+  padding: 10px 16px;
+  backdrop-filter: blur(20px);
+  z-index: 10;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.15);
+  /* Stronger drop shadow to float it */
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Spotify Top Artists — spans centre + right */
+.spotifyWidget:hover {
+  transform: translateX(-50%) scale(1.02);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Spotify Top Artists — starts at col 1 now (no Now Playing column) */
 .spotifyArtists {
-  grid-column: 2 / 4;
-  animation-delay: 0.1s;
+  grid-column: 1 / 4;
+  animation-delay: 0.05s;
 }
 
 /* PSN Profile — spans left + centre (wide) */
@@ -155,7 +175,6 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  .spotifyNow,
   .spotifyArtists,
   .psn,
   .anilist,
@@ -164,6 +183,11 @@
   .grinding,
   .fitness {
     grid-column: auto;
+  }
+
+  .spotifyWidget {
+    width: 220px;
+    padding: 12px 14px;
   }
 
   .blog,
@@ -200,5 +224,12 @@
   .hero {
     min-height: 36vh;
     padding: 40px 20px 32px;
+  }
+
+  .spotifyWidget {
+    position: static;
+    width: 100%;
+    margin-top: 16px;
+    border-radius: 8px;
   }
 }
