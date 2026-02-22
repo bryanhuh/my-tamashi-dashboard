@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Disc3 } from 'lucide-react';
 import styles from './SpotifyTopArtists.module.css';
 import ArtistDrawer from '../ArtistDrawer/ArtistDrawer';
@@ -318,7 +319,12 @@ export default function SpotifyTopArtists() {
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        <div className={styles.introContainer}>
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className={styles.introContainer}
+        >
           <p className={styles.intro}>
             Bryan,{' '}
             {loading
@@ -326,7 +332,7 @@ export default function SpotifyTopArtists() {
               : <>here are your top artists for <span className={styles.introHighlight}>{RANGE_LABELS[range]}</span>.</>
             }
           </p>
-        </div>
+        </motion.div>
       </div>
 
       {needsSetup ? (
@@ -337,7 +343,12 @@ export default function SpotifyTopArtists() {
       ) : (
         <div className={styles.field} ref={fieldRef}>
           {/* Staggered block filter card */}
-          <div className={styles.filterCard}>
+          <motion.div 
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
+            className={styles.filterCard}
+          >
             {TIME_RANGES.map((r, i) => {
               const indent = i === 1 ? '16px' : '0px';
               return (
@@ -351,7 +362,7 @@ export default function SpotifyTopArtists() {
                 </button>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* Animated background canvas */}
           <canvas ref={canvasRef} className={styles.canvas} />
@@ -383,11 +394,16 @@ export default function SpotifyTopArtists() {
           </svg>
 
           {/* Central identity glow */}
-          <div className={styles.central}>
+          <motion.div 
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className={styles.central}
+          >
             <div className={styles.centralRing1} />
             <div className={styles.centralRing2} />
             <div className={styles.centralCore}>♪</div>
-          </div>
+          </motion.div>
 
           {/* Loading */}
           {loading && (
@@ -404,48 +420,65 @@ export default function SpotifyTopArtists() {
             const isConnected = connectedIdxs.includes(i);
 
             return (
-              <button
+              <motion.div
                 key={pos.artist.id || i}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setSelectedArtistId(pos.artist.id);
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  delay: i * 0.04 + 0.3, 
+                  type: 'spring', 
+                  stiffness: 100, 
+                  damping: 12 
                 }}
-                className={`
-                  ${styles.star}
-                  ${isHovered   ? styles.starHovered   : ''}
-                  ${isConnected ? styles.starConnected : ''}
-                `}
                 style={{
-                  left:   pos.x,
-                  top:    pos.y,
-                  width:  sz,
-                  height: sz,
-                  '--float-dur':   `${pos.floatDur}s`,
-                  '--float-delay': `${pos.floatDelay}s`,
+                  position: 'absolute',
+                  left: pos.x,
+                  top: pos.y,
+                  zIndex: isHovered ? 20 : 4,
                 }}
-                onMouseEnter={() => setHoveredIdx(i)}
-                onMouseLeave={() => setHoveredIdx(null)}
               >
-                {/* Photo */}
-                {pos.artist.image
-                  ? <img src={pos.artist.image} alt={pos.artist.name} className={styles.starImg} draggable={false} />
-                  : <div className={styles.starPlaceholder}><Disc3 size={sz * 0.35} /></div>
-                }
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSelectedArtistId(pos.artist.id);
+                  }}
+                  className={`
+                    ${styles.star}
+                    ${isHovered   ? styles.starHovered   : ''}
+                    ${isConnected ? styles.starConnected : ''}
+                  `}
+                  style={{
+                    left:   0,
+                    top:    0,
+                    width:  sz,
+                    height: sz,
+                    '--float-dur':   `${pos.floatDur}s`,
+                    '--float-delay': `${pos.floatDelay}s`,
+                  }}
+                  onMouseEnter={() => setHoveredIdx(i)}
+                  onMouseLeave={() => setHoveredIdx(null)}
+                >
+                  {/* Photo */}
+                  {pos.artist.image
+                    ? <img src={pos.artist.image} alt={pos.artist.name} className={styles.starImg} draggable={false} />
+                    : <div className={styles.starPlaceholder}><Disc3 size={sz * 0.35} /></div>
+                  }
 
-                {/* Glow ring (always visible) */}
-                <div className={styles.starRing} />
+                  {/* Glow ring (always visible) */}
+                  <div className={styles.starRing} />
 
-                {/* Hover info label */}
-                <div className={styles.starLabel}>
-                  <span className={styles.starName}>{pos.artist.name}</span>
-                  {pos.artist.genres?.[0] && (
-                    <span className={styles.starGenre}>{pos.artist.genres[0]}</span>
-                  )}
-                </div>
+                  {/* Hover info label */}
+                  <div className={styles.starLabel}>
+                    <span className={styles.starName}>{pos.artist.name}</span>
+                    {pos.artist.genres?.[0] && (
+                      <span className={styles.starGenre}>{pos.artist.genres[0]}</span>
+                    )}
+                  </div>
 
-                {/* Rank badge */}
-                <div className={styles.starRank}>{String(i + 1).padStart(2, '0')}</div>
-              </button>
+                  {/* Rank badge */}
+                  <div className={styles.starRank}>{String(i + 1).padStart(2, '0')}</div>
+                </button>
+              </motion.div>
             );
           })}
         </div>

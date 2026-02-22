@@ -3,6 +3,9 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background: blue;
+    width: 100%;
+    height: 100%;
 }
 
 /* ── Header row ── */
@@ -26,13 +29,13 @@
     font-size: 1.5rem;
     font-weight: 400;
     font-style: italic;
-    color: var(--text-secondary);
+    color: white;
     line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
 .introHighlight {
-    color: var(--accent);
+    color: white;
     font-style: italic;
 }
 
@@ -80,7 +83,7 @@
 
 .filterActive {
     color: #ffffff !important;
-    background: var(--accent) !important;
+    background: black !important;
     font-weight: 600;
 }
 
@@ -249,9 +252,7 @@
     z-index: 4;
 
     /* Floating animation driven by CSS custom props */
-    animation:
-        starFloat var(--float-dur, 3.5s) ease-in-out infinite var(--float-delay, 0s),
-        starFadeIn 0.5s ease both;
+    animation: starFloat var(--float-dur, 3.5s) ease-in-out infinite var(--float-delay, 0s);
     transition: transform 0.25s var(--ease-out), z-index 0s;
 }
 
@@ -261,18 +262,6 @@
     animation-play-state: paused;
     /* Pause float so hover scale is stable */
     z-index: 20;
-}
-
-@keyframes starFadeIn {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.5);
-    }
-
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
 }
 
 @keyframes starFloat {

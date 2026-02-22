@@ -10,7 +10,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 42vh;
+  height: 100vh;
+  width: 100%;
   padding: 140px 48px 48px;
   /* top padding clears the absolute Spotify widget (~60px) + gap */
   position: relative;
@@ -82,10 +83,13 @@
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
 }
 
-/* Spotify Top Artists — starts at col 1 now (no Now Playing column) */
-.spotifyArtists {
-  grid-column: 1 / 4;
-  animation-delay: 0.05s;
+/* ── Music Full Screen ── */
+.musicFull {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
 }
 
 /* PSN Profile — spans left + centre (wide) */
@@ -175,7 +179,6 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  .spotifyArtists,
   .psn,
   .anilist,
   .roadmap,

@@ -31,12 +31,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Music Full Screen ── */}
+      <section className={styles.musicFull}>
+        <SpotifyTopArtists />
+      </section>
+
       {/* ── Stagger Grid ── */}
       <div className={styles.mainGrid}>
-
-        <div className={`${styles.section} ${styles.spotifyArtists}`}>
-          <SpotifyTopArtists />
-        </div>
         <div className={`${styles.section} ${styles.psn}`}>
           <PSNProfile />
         </div>
