@@ -1,5 +1,17 @@
 # Changelog
 
+## [2026-02-23] - Gaming Layout & Stylistic Refinements
+- **Gaming & Anime Section**: Grouped PSN Profile and AniList Stats into a new, 100% width `.gamingSection` container.
+- **Staggered Design**: Applied a staggered masonry-style layout to the PSN and AniList components. Added an immersive introduction phrase to the section.
+- **Component Refinements**: 
+  - `AniListStats`: Relocated the profile link into the header as a standalone icon to match the PSN profile link.
+  - `PSNProfile`: Replaced plaintext trophy icons with `Trophy` SVGs from `lucide-react`. Clarified that "Recent Games" reflects activity due to API limitations on purchase history.
+- **Aesthetic Integration**: 
+  - Restored the initial hero section's background to pure white.
+  - Aligned the Spotify `musicFull` and `gamingSection` backgrounds to the same cobalt blue accent (`var(--accent)`).
+  - Adjusted the Spotify canvas overlay to be transparent with white gridlines and particles, ensuring clarity against the blue container.
+  - Made the `AniListStats` and `PSNProfile` cards solid white to contrast cleanly.
+
 ## [2026-02-22] - Layout & Constellation Animations
 - **Spotify Now Playing**: Added an `osaka.png` image to the "Not playing right now" empty state to add some personality.
 - **Layout Adjustments**: Refactored the staggered grid in `app/page.js` so the Hero section and the Top Artists section natively span `100%` width and `100vh` without being constrained by grid columns.

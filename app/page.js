@@ -36,14 +36,23 @@ export default function Home() {
         <SpotifyTopArtists />
       </section>
 
-      {/* ── Stagger Grid ── */}
-      <div className={styles.mainGrid}>
+      {/* ── Gaming Section (PSN + AniList) ── */}
+      <section className={styles.gamingSection}>
+        <div className={styles.gamingHeader}>
+          <p className={styles.gamingIntro}>
+            Bryan, mapping out your recent <span className={styles.gamingIntroHighlight}>gaming and anime journey</span>.
+          </p>
+        </div>
         <div className={`${styles.section} ${styles.psn}`}>
           <PSNProfile />
         </div>
         <div className={`${styles.section} ${styles.anilist}`}>
           <AniListStats />
         </div>
+      </section>
+
+      {/* ── Stagger Grid ── */}
+      <div className={styles.mainGrid}>
         <div className={`${styles.section} ${styles.roadmap}`}>
           <LifeRoadmap />
         </div>

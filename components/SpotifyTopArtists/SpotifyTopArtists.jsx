@@ -117,7 +117,7 @@ function useAsciiCanvas(canvasRef, preRef) {
       const w = canvas.width;
       const h = canvas.height;
 
-      // 1) Canvas Background (White + Blue Puzzle Lines)
+      // 1) Canvas Background
       ctx.clearRect(0, 0, w, h);
 
       // White radial gradient bg
@@ -139,7 +139,7 @@ function useAsciiCanvas(canvasRef, preRef) {
         ctx.moveTo(0, y);
         ctx.lineTo(w, y);
       }
-      ctx.strokeStyle = `rgba(43, 0, 255, 0.06)`; // Suble blue
+      ctx.strokeStyle = `rgba(43, 0, 255, 0.06)`; // Subtle blue
       ctx.lineWidth = 1;
       ctx.stroke();
 

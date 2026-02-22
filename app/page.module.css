@@ -17,6 +17,7 @@
   position: relative;
   gap: 8px;
   border-bottom: 1px solid var(--border);
+  background-color: #ffffff;
 }
 
 /* ── Stagger Grid ── */
@@ -56,6 +57,46 @@
   background: var(--bg-card-hover);
 }
 
+/* ── Gaming Section ── */
+.gamingSection {
+  width: 100%;
+  background-color: var(--accent);
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+  padding: 48px;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+
+.gamingHeader {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.gamingIntro {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-style: italic;
+  color: white;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.gamingIntroHighlight {
+  color: white;
+  font-style: italic;
+}
+
+.gamingSection .section {
+  background: #ffffff;
+}
+
+.gamingSection .section:hover {
+  background: #ffffff;
+}
+
 /* ── Individual grid placements ── */
 
 /* ── Spotify Widget (hero top-center, Dynamic Island style) ── */
@@ -88,20 +129,20 @@
   width: 100%;
   height: 100vh;
   display: flex;
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--border);
+  background: var(--accent);
+  border-bottom: none;
 }
 
-/* PSN Profile — spans left + centre (wide) */
+/* PSN Profile */
 .psn {
-  grid-column: 1 / 3;
   animation-delay: 0.15s;
+  margin-bottom: 80px;
 }
 
-/* AniList — right column, starts at PSN's row (stagger effect) */
+/* AniList */
 .anilist {
-  grid-column: 3 / 4;
   animation-delay: 0.18s;
+  margin-top: 80px;
 }
 
 /* Life Roadmap — spans centre + right */
@@ -179,8 +220,17 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  .gamingSection {
+    grid-template-columns: 1fr 1fr;
+    padding: 32px 24px;
+    gap: 24px;
+  }
+
   .psn,
-  .anilist,
+  .anilist {
+    margin: 0;
+  }
+
   .roadmap,
   .streak,
   .grinding,
@@ -209,9 +259,16 @@
 }
 
 @media (max-width: 600px) {
-  .mainGrid {
+
+  .mainGrid,
+  .gamingSection {
     grid-template-columns: 1fr;
     border-left: none;
+  }
+
+  .gamingSection {
+    padding: 24px 16px;
+    gap: 16px;
   }
 
   .section {

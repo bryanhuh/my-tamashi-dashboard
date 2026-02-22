@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Gamepad2, ExternalLink, Wifi, WifiOff } from 'lucide-react';
+import { Gamepad2, ExternalLink, Wifi, WifiOff, Trophy } from 'lucide-react';
 import styles from './PSNProfile.module.css';
 
 const TROPHY_COLORS = {
@@ -12,10 +12,10 @@ const TROPHY_COLORS = {
 };
 
 const TROPHY_ICONS = {
-  platinum: '♦',
-  gold: '●',
-  silver: '●',
-  bronze: '●',
+  platinum: <Trophy size={16} />,
+  gold: <Trophy size={16} />,
+  silver: <Trophy size={16} />,
+  bronze: <Trophy size={16} />,
 };
 
 function formatPlaytime(duration) {
@@ -185,10 +185,9 @@ export default function PSNProfile() {
         </div>
       </div>
 
-      {/* ── Recent Games ── */}
       {data?.recentGames?.length > 0 && (
         <div className={styles.gamesSection}>
-          <div className={styles.gamesSectionLabel}>Recent Games</div>
+          <div className={styles.gamesSectionLabel}>Recent Activity (Games)</div>
           <div className={styles.gamesStrip}>
             {data.recentGames.map((game) => (
               <div key={game.id} className={styles.gameCard} title={game.name}>

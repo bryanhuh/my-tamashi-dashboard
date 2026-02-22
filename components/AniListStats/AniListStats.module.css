@@ -4,6 +4,12 @@
     gap: 16px;
 }
 
+.headerTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /* ── Stats Grid ── */
 .statsGrid {
     display: grid;
@@ -165,9 +171,9 @@
 
 /* ── Profile Link ── */
 .profileLink {
-    align-self: flex-start;
     color: var(--anilist);
-    border-color: rgba(61, 180, 242, 0.2);
+    border-color: rgba(61, 180, 242, 0.25);
+    padding: 6px 10px;
 }
 
 .profileLink:hover {

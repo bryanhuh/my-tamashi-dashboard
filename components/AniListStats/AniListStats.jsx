@@ -83,7 +83,17 @@ export default function AniListStats() {
 
   return (
     <div className={styles.container}>
-      <div className="sectionIndex">04 — AniList</div>
+      <div className={styles.headerTop}>
+        <div className="sectionIndex">04 — AniList</div>
+        <a
+          href={`https://anilist.co/user/${username || 'breezarre'}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`pill ${styles.profileLink}`}
+        >
+          <ExternalLink size={11} />
+        </a>
+      </div>
 
       {/* ── Stats Grid ── */}
       <div className={styles.statsGrid}>
@@ -147,15 +157,6 @@ export default function AniListStats() {
           </div>
         </div>
       )}
-
-      <a
-        href={`https://anilist.co/user/${username || 'breezarre'}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`pill ${styles.profileLink}`}
-      >
-        <ExternalLink size={12} /> AniList Profile
-      </a>
     </div>
   );
 }
