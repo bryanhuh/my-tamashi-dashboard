@@ -1,5 +1,12 @@
 # Changelog
 
+## [2026-02-23] - LifeRoadmap 3D Animations & Rainbow Particles
+
+- **3D Image Hover**: Added `perspective(800px)` 3D tilt effect on LifeRoadmap character images — tilts toward the card side on hover with directional `rotateY` based on left/right position.
+- **Rainbow Particle Effects**: Canvas-based particle system behind each character image using an 8-color rainbow palette (#E6261F, #EB7532, #F7D038, #A3E048, #49DA9A, #34BBE6, #4355DB, #D23BE7). Particles flow directionally (left for left images, right for right images) with matching colored glow effects.
+- **Hover Intensification**: Particles spawn more densely on hover (up to 60) with an accent `drop-shadow` glow on the character image.
+- **User Edits**: Removed "Bryan" prefix from section intros, simplified footer to "魂", updated Spotify intro text.
+
 ## [2026-02-23] - Visual Polish, Blog Redesign & Grid Backgrounds
 
 - **Blog "Coming Soon" Redesign**: Replaced simple text with a full-width section featuring a black-bordered grid cells background, serif heading ("Blog Coming Soon"), and subtitle. Removed from the stagger grid into its own `blogFull` section.

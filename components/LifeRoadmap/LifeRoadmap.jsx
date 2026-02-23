@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import styles from './LifeRoadmap.module.css';
@@ -48,6 +48,113 @@ const rightPaths = [
   'M 95,0 C 90,60 10,40 46,100',
 ];
 
+// ── Particle Canvas ──
+const PARTICLE_COLORS = [
+  [230, 38, 31],   // #E6261F red
+  [235, 117, 50],  // #EB7532 orange
+  [247, 208, 56],  // #F7D038 yellow
+  [163, 224, 72],  // #A3E048 green
+  [73, 218, 154],  // #49DA9A teal
+  [52, 187, 230],  // #34BBE6 light blue
+  [67, 85, 219],   // #4355DB indigo
+  [210, 59, 231],  // #D23BE7 purple
+];
+
+function ParticleField({ direction, isHovered }) {
+  const canvasRef = useRef(null);
+  const particlesRef = useRef([]);
+  const rafRef = useRef(null);
+
+  const createParticle = useCallback((w, h, dir) => {
+    const fromRight = dir === 'right';
+    const color = PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)];
+    return {
+      x: fromRight ? Math.random() * w * 0.4 : w * 0.6 + Math.random() * w * 0.4,
+      y: Math.random() * h,
+      vx: fromRight ? (Math.random() * 2 + 1) : -(Math.random() * 2 + 1),
+      vy: (Math.random() - 0.5) * 1.2,
+      r: Math.random() * 2.5 + 1,
+      opacity: Math.random() * 0.6 + 0.2,
+      life: 1,
+      decay: Math.random() * 0.008 + 0.004,
+      color,
+    };
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = canvas.offsetWidth * 2;
+      canvas.height = canvas.offsetHeight * 2;
+      ctx.scale(2, 2);
+    }
+    resize();
+
+    const w = canvas.offsetWidth;
+    const h = canvas.offsetHeight;
+
+    // Initial particles
+    particlesRef.current = Array.from({ length: 20 }, () => createParticle(w, h, direction));
+
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      const particles = particlesRef.current;
+
+      // Spawn more when hovered
+      if (isHovered && particles.length < 60) {
+        particles.push(createParticle(w, h, direction));
+        particles.push(createParticle(w, h, direction));
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= p.decay;
+
+        if (p.life <= 0 || p.x < -10 || p.x > w + 10 || p.y < -10 || p.y > h + 10) {
+          particles.splice(i, 1);
+          if (particles.length < (isHovered ? 50 : 15)) {
+            particles.push(createParticle(w, h, direction));
+          }
+          continue;
+        }
+
+        const [r, g, b] = p.color;
+        const alpha = p.opacity * p.life;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        ctx.fill();
+
+        // Glow effect
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.15})`;
+        ctx.fill();
+      }
+
+      rafRef.current = requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [direction, isHovered, createParticle]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className={styles.particleCanvas}
+    />
+  );
+}
+
 export default function LifeRoadmap() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -71,6 +178,7 @@ export default function LifeRoadmap() {
           const pathArr = isLeft ? leftPaths : rightPaths;
           const svgPath = pathArr[i % pathArr.length];
           const isDimmed = hoveredIndex !== null && hoveredIndex !== i;
+          const isThisHovered = hoveredIndex === i;
 
           return (
             <div key={item.id}>
@@ -104,22 +212,28 @@ export default function LifeRoadmap() {
                   <p className={styles.description}>{item.description}</p>
                 </motion.div>
 
-                {/* Character Image */}
+                {/* Character Image with Particles */}
                 <motion.div
                   variants={imageVariants}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: '-15%' }}
-                  className={styles.imageWrapper}
+                  className={`${styles.imageWrapper} ${styles.imageWrapper3d}`}
                 >
-                  <Image
-                    src={characterImages[i] || characterImages[0]}
-                    alt={`Character ${i + 1}`}
-                    width={200}
-                    height={300}
-                    className={styles.characterImage}
-                    unoptimized
+                  <ParticleField
+                    direction={isLeft ? 'left' : 'right'}
+                    isHovered={isThisHovered}
                   />
+                  <div className={styles.image3dContainer}>
+                    <Image
+                      src={characterImages[i] || characterImages[0]}
+                      alt={`Character ${i + 1}`}
+                      width={200}
+                      height={300}
+                      className={styles.characterImage}
+                      unoptimized
+                    />
+                  </div>
                 </motion.div>
               </div>
 
