@@ -1,6 +1,5 @@
 .container {
     width: 100%;
-    /* Align with other sections by utilizing full available width minus page padding */
     margin: 0 auto;
     position: relative;
     display: flex;
@@ -10,27 +9,47 @@
 .timeline {
     width: 100%;
     max-width: 1000px;
-    /* Wider timeline to match content spread */
     display: flex;
     flex-direction: column;
     margin: 60px auto 40px;
     overflow: visible;
 }
 
+/* ── Row wrapper (card + image side-by-side) ── */
 .itemWrapper {
     width: 100%;
     position: relative;
     overflow: visible;
-    /* No negative margin here — the SVG connector provides the visual bridge */
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    cursor: pointer;
+    transition: opacity 0.35s ease, filter 0.35s ease;
 }
 
 .itemWrapper:not(:first-child) {
-    /* Pull each item up so the connector SVG overlaps naturally between staggered cards */
     margin-top: -80px;
 }
 
+/* Alternating direction */
+.rowLeft {
+    flex-direction: row;
+}
+
+.rowRight {
+    flex-direction: row-reverse;
+}
+
+/* ── Dimmed state (applied when another row is hovered) ── */
+.dimmed {
+    opacity: 0.15;
+    filter: blur(2px);
+}
+
+/* ── Card ── */
 .box {
-    width: calc(50% - 40px);
+    width: 50%;
+    flex-shrink: 0;
     border-width: 2px;
     border-style: solid;
     border-color: #ffffff;
@@ -48,17 +67,35 @@
     box-shadow: 4px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
-.boxLeft {
-    margin-right: auto;
-    margin-left: 0;
+/* ── Character image ── */
+.imageWrapper {
+    width: 50%;
+    flex-shrink: 0;
+    display: flex;
+    z-index: 2;
 }
 
-.boxRight {
-    margin-left: auto;
-    margin-right: 0;
+.rowLeft .imageWrapper {
+    justify-content: flex-start;
 }
 
-/* Typography — colors animated by Framer Motion */
+.rowRight .imageWrapper {
+    justify-content: flex-end;
+}
+
+.characterImage {
+    width: 200px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(4px 6px 8px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+}
+
+.itemWrapper:hover .characterImage {
+    transform: scale(1.05);
+}
+
+/* ── Typography ── */
 .year {
     font-family: var(--font-serif);
     font-size: 3.5rem;
@@ -95,7 +132,7 @@
     line-height: 1.6;
 }
 
-/* Connector — rendered in-flow between cards so it never gets clipped */
+/* ── Connector SVG ── */
 .connector {
     display: block;
     width: 100%;
@@ -104,7 +141,6 @@
     position: relative;
     z-index: 1;
     pointer-events: none;
-    /* Pull up into the stagger gap so it looks connected */
     margin-top: -20px;
     margin-bottom: -20px;
 }
@@ -118,20 +154,33 @@
     vector-effect: non-scaling-stroke;
 }
 
+/* ── Mobile ── */
 @media (max-width: 768px) {
     .timeline {
         margin: 20px auto;
         padding: 0 16px;
     }
 
-    .box {
-        width: 100%;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+    .itemWrapper {
+        flex-direction: column !important;
+        gap: 16px;
     }
 
     .itemWrapper:not(:first-child) {
         margin-top: 24px;
+    }
+
+    .box {
+        width: 100%;
+    }
+
+    .imageWrapper {
+        width: 100%;
+        justify-content: center !important;
+    }
+
+    .characterImage {
+        width: 140px;
     }
 
     .connector {
