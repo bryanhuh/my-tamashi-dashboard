@@ -40,7 +40,7 @@ export default function Home() {
       <section className={styles.gamingSection}>
         <div className={styles.gamingHeader}>
           <p className={styles.gamingIntro}>
-            Bryan, mapping out your recent <span className={styles.gamingIntroHighlight}>gaming and anime journey</span>.
+            Mapping out your recent <span className={styles.gamingIntroHighlight}>anime and gaming activity.</span>.
           </p>
         </div>
         <div className={`${styles.section} ${styles.psn}`}>
@@ -59,7 +59,7 @@ export default function Home() {
       <section className={styles.grindSection}>
         <div className={styles.grindHeader}>
           <p className={styles.grindIntro}>
-            Bryan, here's what you're <span className={styles.grindIntroHighlight}>grinding and training</span> right now.
+            Here's what you're <span className={styles.grindIntroHighlight}>grinding and training</span> right now.
           </p>
         </div>
         <div className={`${styles.section} ${styles.grinding}`}>
@@ -68,6 +68,14 @@ export default function Home() {
         <div className={`${styles.section} ${styles.fitness}`}>
           <RunningGymTracker />
         </div>
+        <div className={styles.peekPanel}>
+          <BuyMeACoffee />
+        </div>
+      </section>
+
+      {/* ── Blog Coming Soon ── */}
+      <section className={styles.blogFull}>
+        <BlogPosts />
       </section>
 
       {/* ── Stagger Grid ── */}
@@ -75,24 +83,19 @@ export default function Home() {
         {/* <div className={`${styles.section} ${styles.streak}`}>
           <TaskStreak />
         </div> */}
-        <div className={`${styles.section} ${styles.blog}`}>
-          <BlogPosts />
-        </div>
         {/* <div className={`${styles.section} ${styles.logs}`}>
           <AgentLogs />
         </div> */}
-        <div className={`${styles.section} ${styles.coffee}`}>
-          <BuyMeACoffee />
-        </div>
       </div>
 
       {/* ── Footer ── */}
       <footer className={styles.footer}>
         <span className={styles.footerLeft}>
-          <span className={styles.footerAccent}>Tamashi</span> — Digital HQ
+          <span className={styles.footerAccent}>Tamashi</span>.exe
         </span>
         <span className={styles.footerRight}>
-          Built with 魂
+          {/* Built with 魂 */}
+          魂
         </span>
       </footer>
     </div>

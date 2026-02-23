@@ -62,7 +62,7 @@ export default function PSNProfile() {
   if (loading) {
     return (
       <div className={styles.container}>
-        <div className="sectionIndex">03 — PlayStation</div>
+        <div className="sectionIndex">PlayStation</div>
         <div className={styles.skeletonHeader}>
           <div className={`skeleton ${styles.skeletonAvatar}`} />
           <div className={styles.skeletonHeaderText}>
@@ -87,7 +87,7 @@ export default function PSNProfile() {
   if (data?.needsSetup) {
     return (
       <div className={styles.container}>
-        <div className="sectionIndex">03 — PlayStation</div>
+        <div className="sectionIndex">PlayStation</div>
         <div className={styles.empty}>
           <Gamepad2 size={24} className={styles.emptyIcon} />
           <p>PSN not connected</p>
@@ -105,7 +105,7 @@ export default function PSNProfile() {
 
   return (
     <div className={styles.container}>
-      <div className="sectionIndex">03 — PlayStation</div>
+      <div className="sectionIndex">PlayStation</div>
 
       {/* ── Profile Header ── */}
       <div className={styles.header}>

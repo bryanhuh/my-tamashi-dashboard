@@ -82,7 +82,7 @@ function DraggableProgressBar({ initialProgress, id }) {
 export default function CurrentlyGrinding() {
   return (
     <div className={styles.container}>
-      <div className="sectionIndex">07 — Currently Grinding</div>
+      <div className="sectionIndex">Currently Grinding</div>
 
       <div className={styles.grid}>
         {grindingData.map((item) => (

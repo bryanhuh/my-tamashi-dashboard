@@ -110,8 +110,8 @@ export default function SpotifyNowPlaying() {
         <div className={styles.notPlaying}>
           <Music size={20} className={styles.icon} />
           <p style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            Not playing right now
-            <img src="/osaka.png" alt="osaka" style={{ height: '30px', width: 'auto' }} />
+            Not playing rn
+            <img src="/daioh/necoconeco.png" alt="osaka" style={{ height: '30px', width: 'auto' }} />
           </p>
         </div>
       )}

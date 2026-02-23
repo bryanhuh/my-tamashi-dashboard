@@ -84,7 +84,7 @@ export default function AniListStats() {
   return (
     <div className={styles.container}>
       <div className={styles.headerTop}>
-        <div className="sectionIndex">04 — AniList</div>
+        <div className="sectionIndex">AniList</div>
         <a
           href={`https://anilist.co/user/${username || 'breezarre'}`}
           target="_blank"

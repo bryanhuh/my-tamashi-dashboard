@@ -29,13 +29,13 @@
     font-size: 1.5rem;
     font-weight: 400;
     font-style: italic;
-    color: white;
+    color: #111;
     line-height: 1.4;
     letter-spacing: -0.01em;
 }
 
 .introHighlight {
-    color: white;
+    color: #111;
     font-style: italic;
 }
 
@@ -93,6 +93,22 @@
     height: 560px;
     border-radius: 4px;
     overflow: hidden;
+}
+
+/* Static black-bordered grid background */
+.gridBg {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.gridCell {
+    border: 1px solid #000000;
+    opacity: 0.12;
 }
 
 /* ── Canvas background ── */
@@ -284,6 +300,8 @@
     display: block;
     filter: grayscale(30%) brightness(0.8);
     transition: filter 0.25s ease;
+    border: 3px solid #ffffff;
+    box-sizing: border-box;
 }
 
 .star:hover .starImg,

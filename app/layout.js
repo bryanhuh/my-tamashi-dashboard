@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Tamashi — Digital HQ",
+  title: "Tamashi",
   description: "Personal command center. Not a portfolio.",
   icons: { icon: "/favicon.ico" },
 };

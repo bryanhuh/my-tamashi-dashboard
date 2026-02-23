@@ -29,7 +29,7 @@ query ($username: String) {
 
 const ACTIVITY_QUERY = `
 query ($userId: Int, $page: Int) {
-  Page(page: $page, perPage: 10) {
+  Page(page: $page, perPage: 25) {
     activities(userId: $userId, sort: ID_DESC) {
       ... on ListActivity {
         id
@@ -100,7 +100,7 @@ export async function GET() {
 
     const activity = rawActivities
       .filter((a) => a?.media) // Only ListActivity with a media item
-      .slice(0, 6)
+      .slice(0, 20)
       .map((a) => ({
         id: a.id,
         type: a.type,         // ANIME_LIST or MANGA_LIST

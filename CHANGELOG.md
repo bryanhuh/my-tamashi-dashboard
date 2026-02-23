@@ -1,5 +1,26 @@
 # Changelog
 
+## [2026-02-23] - Visual Polish, Blog Redesign & Grid Backgrounds
+
+- **Blog "Coming Soon" Redesign**: Replaced simple text with a full-width section featuring a black-bordered grid cells background, serif heading ("Blog Coming Soon"), and subtitle. Removed from the stagger grid into its own `blogFull` section.
+- **Black Bordered Grid Backgrounds**: Applied consistent 10-column black-bordered grid cell backgrounds (0.12 opacity) to `SpotifyTopArtists`, `LifeRoadmap`, and `BlogPosts` sections for visual cohesion.
+- **BuyMeACoffee Peek Panel**: Implemented a right-aligned off-canvas peek panel in the grind section with smooth slide-in on hover. Added a hand-drawn Excalidraw-style SVG arrow extending outside the container.
+- **Spotify Section**:
+  - Changed background from accent blue to white.
+  - Removed animated puzzle grid from canvas, replaced with static CSS grid cells.
+  - Intro text changed to black. Increased artist icon sizes (~20px larger) with 3px white border.
+- **AniList Updates**:
+  - Header line now stretches properly using `:global(.sectionIndex)` fix.
+  - Icons and profile link button changed from light blue to accent blue.
+  - Recent activities increased from 6 to 20 with scrollable feed (max-height 400px).
+- **Dashboard Background**: Changed `--bg-base` from `#e5e5e5` (gray) to `#ffffff` (white).
+- **Hero Section**: Removed `border-bottom` divider.
+- **Section Headers**: Removed numbered prefixes (e.g., "03 — PlayStation" → "PlayStation") across all components.
+- **LifeRoadmap**: Heading moved to left-aligned; removed `sectionIndex` line to avoid overlapping with grid background.
+- **SpotifyNowPlaying**: Centered "Not playing rn" text and image in the widget.
+- **Title & Footer**: Changed page title to "Tamashi", footer to "Tamashi.exe".
+- **Grinding Data**: Updated game from Elden Ring to Cyberpunk 2077.
+
 ## [2026-02-23] - Grind & Fitness Section Redesign
 
 - **New Grind Section**: Extracted `CurrentlyGrinding` and `RunningGymTracker` out of the stagger grid into a new shared full-width blue section (`grindSection`), mirroring the Gaming/AniList section pattern with a centered italic serif intro line.

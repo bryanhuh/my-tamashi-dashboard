@@ -11,7 +11,7 @@ export default function RunningGymTracker() {
 
   return (
     <div className={styles.container}>
-      <div className="sectionIndex">10 — Fitness</div>
+      <div className="sectionIndex">Fitness</div>
 
 
 

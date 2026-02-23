@@ -2,12 +2,20 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .headerTop {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 10px;
+}
+
+.headerTop :global(.sectionIndex) {
+    flex: 1;
+    margin-bottom: 0;
 }
 
 /* ── Stats Grid ── */
@@ -36,7 +44,7 @@
 }
 
 .statIcon {
-    color: var(--anilist);
+    color: var(--accent);
 }
 
 .statIconEmoji {
@@ -79,6 +87,8 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .feedItem {
@@ -171,14 +181,14 @@
 
 /* ── Profile Link ── */
 .profileLink {
-    color: var(--anilist);
-    border-color: rgba(61, 180, 242, 0.25);
+    color: var(--accent);
+    border-color: rgba(43, 0, 255, 0.25);
     padding: 6px 10px;
 }
 
 .profileLink:hover {
-    border-color: var(--anilist);
-    background: rgba(61, 180, 242, 0.08);
+    border-color: var(--accent);
+    background: rgba(43, 0, 255, 0.08);
 }
 
 /* ── Skeleton ── */

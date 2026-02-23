@@ -6,6 +6,22 @@
     flex-direction: column;
 }
 
+/* Black-bordered grid background */
+.gridBg {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.gridCell {
+    border: 1px solid #000000;
+    opacity: 0.12;
+}
+
 .timeline {
     width: 100%;
     max-width: 1000px;

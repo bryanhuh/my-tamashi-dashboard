@@ -21,11 +21,11 @@ const RANGE_LABELS = {
 
 // Star size decreasing by rank
 function starSize(index) {
-  if (index === 0) return 72;
-  if (index === 1) return 64;
-  if (index  < 4) return 56;
-  if (index  < 7) return 48;
-  return 42;
+  if (index === 0) return 92;
+  if (index === 1) return 82;
+  if (index  < 4) return 72;
+  if (index  < 7) return 62;
+  return 56;
 }
 
 // Place artists on concentric rings around (cx, cy)
@@ -117,31 +117,10 @@ function useAsciiCanvas(canvasRef, preRef) {
       const w = canvas.width;
       const h = canvas.height;
 
-      // 1) Canvas Background
+      // 1) Clear canvas (transparent, parent provides white bg)
       ctx.clearRect(0, 0, w, h);
 
-      // White radial gradient bg
-      const bg = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w * 0.85);
-      bg.addColorStop(0,   '#ffffff');
-      bg.addColorStop(0.5, '#f5f5fa');
-      bg.addColorStop(1,   '#ebebf5');
-      ctx.fillStyle = bg;
-      ctx.fillRect(0, 0, w, h);
-
-      // Puzzle background lines (subtle blue grid)
-      ctx.beginPath();
-      const gridSize = 45;
-      for (let x = (t * 5) % gridSize; x <= w; x += gridSize) {
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, h);
-      }
-      for (let y = (t * 5) % gridSize; y <= h; y += gridSize) {
-        ctx.moveTo(0, y);
-        ctx.lineTo(w, y);
-      }
-      ctx.strokeStyle = `rgba(43, 0, 255, 0.06)`; // Subtle blue
-      ctx.lineWidth = 1;
-      ctx.stroke();
+      // (puzzle grid removed — replaced by static CSS grid)
 
       // Ambient dots (accent blue)
       particles.forEach(p => {
@@ -326,10 +305,9 @@ export default function SpotifyTopArtists() {
           className={styles.introContainer}
         >
           <p className={styles.intro}>
-            Bryan,{' '}
             {loading
-              ? 'mapping your constellation…'
-              : <>here are your top artists for <span className={styles.introHighlight}>{RANGE_LABELS[range]}</span>.</>
+              ? 'Mapping your constellation…'
+              : <>Here's your top artists for <span className={styles.introHighlight}>{RANGE_LABELS[range]}</span>.</>
             }
           </p>
         </motion.div>
@@ -364,9 +342,17 @@ export default function SpotifyTopArtists() {
             })}
           </motion.div>
 
+
           {/* Animated background canvas */}
           <canvas ref={canvasRef} className={styles.canvas} />
           <pre ref={preRef} className={styles.asciiOverlay} aria-hidden="true" />
+
+          {/* Static black-bordered grid background */}
+          <div className={styles.gridBg}>
+            {Array.from({ length: 60 }).map((_, i) => (
+              <div key={i} className={styles.gridCell} />
+            ))}
+          </div>
 
           {/* Artist corner 3D shader overlay */}
           <ArtistEffect />

@@ -1,26 +1,27 @@
-// import { BookOpen, Clock, ArrowRight } from 'lucide-react';
-// import styles from './BlogPosts.module.css';
-// import blogData from '@/data/blog.json';
+import styles from './BlogPosts.module.css';
 
 export default function BlogPosts() {
+  // 8 columns × 4 rows = 32 cells
+  const cells = Array.from({ length: 40 });
+
   return (
-    <div style={{
-      padding: '40px 28px',
-      textAlign: 'center',
-    }}>
-      <div className="sectionIndex">08 — Blog</div>
-      <p style={{
-        fontFamily: 'var(--font-display)',
-        fontSize: '0.8rem',
-        fontWeight: 400,
-        color: '#111',
-        marginTop: '24px',
-        lineHeight: 1.4,
-        letterSpacing: '0.18em',
-        textTransform: 'uppercase',
-      }}>
-        BLOG <span style={{ color: '#2b00ff' }}>coming soon!</span>
-      </p>
+    <div className={styles.container}>
+      {/* Blue-bordered grid background */}
+      <div className={styles.grid}>
+        {cells.map((_, i) => (
+          <div key={i} className={styles.cell} />
+        ))}
+      </div>
+
+      {/* Centered text */}
+      <div className={styles.content}>
+        <h2 className={styles.heading}>
+          Blog <span className={styles.headingAccent}>Coming Soon</span>
+        </h2>
+        <p className={styles.subtitle}>
+          Thoughts on life, lol.
+        </p>
+      </div>
     </div>
   );
 }

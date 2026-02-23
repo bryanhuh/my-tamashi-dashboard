@@ -53,8 +53,15 @@ export default function LifeRoadmap() {
 
   return (
     <div className={styles.container}>
-      <div className="sectionIndex" style={{ textAlign: 'center', marginBottom: '24px', color: '#111' }}>
-        05 — Life Roadmap
+      {/* Black-bordered grid background */}
+      <div className={styles.gridBg}>
+        {Array.from({ length: 80 }).map((_, i) => (
+          <div key={i} className={styles.gridCell} />
+        ))}
+      </div>
+
+      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', fontWeight: 500, color: 'var(--accent)', letterSpacing: '0.18em', textTransform: 'uppercase', textAlign: 'left', marginBottom: '24px', paddingLeft: '48px' }}>
+        Life Roadmap
       </div>
 
       <div className={styles.timeline}>
