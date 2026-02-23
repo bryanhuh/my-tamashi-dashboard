@@ -55,17 +55,26 @@ export default function Home() {
         <LifeRoadmap />
       </section>
 
-      {/* ── Stagger Grid ── */}
-      <div className={styles.mainGrid}>
-        {/* <div className={`${styles.section} ${styles.streak}`}>
-          <TaskStreak />
-        </div> */}
+      {/* ── Grind Section (CurrentlyGrinding + RunningGymTracker) ── */}
+      <section className={styles.grindSection}>
+        <div className={styles.grindHeader}>
+          <p className={styles.grindIntro}>
+            Bryan, here's what you're <span className={styles.grindIntroHighlight}>grinding and training</span> right now.
+          </p>
+        </div>
         <div className={`${styles.section} ${styles.grinding}`}>
           <CurrentlyGrinding />
         </div>
         <div className={`${styles.section} ${styles.fitness}`}>
           <RunningGymTracker />
         </div>
+      </section>
+
+      {/* ── Stagger Grid ── */}
+      <div className={styles.mainGrid}>
+        {/* <div className={`${styles.section} ${styles.streak}`}>
+          <TaskStreak />
+        </div> */}
         <div className={`${styles.section} ${styles.blog}`}>
           <BlogPosts />
         </div>

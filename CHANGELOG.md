@@ -1,5 +1,19 @@
 # Changelog
 
+## [2026-02-23] - Grind & Fitness Section Redesign
+
+- **New Grind Section**: Extracted `CurrentlyGrinding` and `RunningGymTracker` out of the stagger grid into a new shared full-width blue section (`grindSection`), mirroring the Gaming/AniList section pattern with a centered italic serif intro line.
+- **CurrentlyGrinding**:
+  - All item cards are now white with clean box shadows on the blue background.
+  - Status badges use square corners (no border-radius).
+  - All items set to `active` status.
+  - Progress bars are now **fully draggable** — click, drag, or touch to manually adjust each item's progress percentage.
+  - Stagger offset applied at the layout level (`margin-top: 80px`) matching PSN/AniList visual rhythm.
+- **RunningGymTracker**:
+  - All stat blocks, last run, last gym session, and monthly progress now use white cards.
+  - Streak banner uses a frosted translucent white style on the blue background.
+  - Exercise rep details tinted blue for visual consistency.
+
 ## [2026-02-23] - Life Roadmap Redesign & Component Cleanup
 
 - **Life Roadmap**: Completely redesigned the `LifeRoadmap` component with a creative alternating zig-zag card layout.

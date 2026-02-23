@@ -5,65 +5,69 @@ import fitnessData from '@/data/fitness.json';
 export default function RunningGymTracker() {
   const { weeklyGoal, currentWeek, lastRun, lastGym, monthlyProgress, workoutStreak } = fitnessData;
 
-  const runProgress = Math.round((currentWeek.totalKm / weeklyGoal.totalKm) * 100);
-  const gymProgress = Math.round((currentWeek.gymCompleted / weeklyGoal.gymSessions) * 100);
-  const monthlyKmPct = Math.round((monthlyProgress.currentKm / monthlyProgress.goalKm) * 100);
+  const runProgress  = Math.round((currentWeek.totalKm       / weeklyGoal.totalKm)      * 100);
+  const gymProgress  = Math.round((currentWeek.gymCompleted  / weeklyGoal.gymSessions)  * 100);
+  const monthlyKmPct = Math.round((monthlyProgress.currentKm / monthlyProgress.goalKm)  * 100);
 
   return (
     <div className={styles.container}>
       <div className="sectionIndex">10 — Fitness</div>
 
+      {/* Streak banner */}
       <div className={styles.streakBanner}>
         <Flame size={16} className={styles.flameIcon} />
         <span className={styles.streakCount}>{workoutStreak} day streak</span>
       </div>
 
+      {/* Weekly stats — white cards */}
       <div className={styles.weekStats}>
-        <div className={styles.weekStat}>
-          <Activity size={14} className={styles.statIcon} />
-          <div className={styles.statInfo}>
-            <span className={styles.statValue}>{currentWeek.totalKm} km</span>
-            <span className={styles.statGoal}>/ {weeklyGoal.totalKm} km goal</span>
+        <div className={styles.card}>
+          <div className={styles.cardTop}>
+            <Activity size={14} className={styles.statIcon} />
+            <div className={styles.statInfo}>
+              <span className={styles.statValue}>{currentWeek.totalKm} km</span>
+              <span className={styles.statGoal}>/ {weeklyGoal.totalKm} km goal</span>
+            </div>
           </div>
-          <div className="progressBar" style={{ marginTop: 6 }}>
-            <div className="progressFill" style={{ width: `${runProgress}%`, background: 'var(--success)' }} />
+          <div className={styles.progressTrack}>
+            <div className={styles.progressFill} style={{ width: `${runProgress}%`, background: '#10b981' }} />
           </div>
         </div>
-        <div className={styles.weekStat}>
-          <Dumbbell size={14} className={styles.statIcon} />
-          <div className={styles.statInfo}>
-            <span className={styles.statValue}>{currentWeek.gymCompleted} sessions</span>
-            <span className={styles.statGoal}>/ {weeklyGoal.gymSessions} goal</span>
+
+        <div className={styles.card}>
+          <div className={styles.cardTop}>
+            <Dumbbell size={14} className={styles.statIcon} />
+            <div className={styles.statInfo}>
+              <span className={styles.statValue}>{currentWeek.gymCompleted} sessions</span>
+              <span className={styles.statGoal}>/ {weeklyGoal.gymSessions} goal</span>
+            </div>
           </div>
-          <div className="progressBar" style={{ marginTop: 6 }}>
-            <div className="progressFill" style={{ width: `${gymProgress}%`, background: 'var(--accent)' }} />
+          <div className={styles.progressTrack}>
+            <div className={styles.progressFill} style={{ width: `${gymProgress}%`, background: '#2b00ff' }} />
           </div>
         </div>
       </div>
 
-      <div className={styles.lastSession}>
+      {/* Last Run — white card */}
+      <div className={styles.card}>
         <div className={styles.sessionLabel}>Last Run</div>
         <div className={styles.sessionGrid}>
-          <div className={styles.sessionItem}>
-            <span className={styles.sessionValue}>{lastRun.distance} km</span>
-            <span className={styles.sessionKey}>Distance</span>
-          </div>
-          <div className={styles.sessionItem}>
-            <span className={styles.sessionValue}>{lastRun.time}</span>
-            <span className={styles.sessionKey}>Time</span>
-          </div>
-          <div className={styles.sessionItem}>
-            <span className={styles.sessionValue}>{lastRun.pace}</span>
-            <span className={styles.sessionKey}>Pace</span>
-          </div>
-          <div className={styles.sessionItem}>
-            <span className={styles.sessionValue}>{lastRun.calories}</span>
-            <span className={styles.sessionKey}>Cal</span>
-          </div>
+          {[
+            { label: 'Distance', value: `${lastRun.distance} km` },
+            { label: 'Time',     value: lastRun.time },
+            { label: 'Pace',     value: lastRun.pace },
+            { label: 'Cal',      value: lastRun.calories },
+          ].map(({ label, value }) => (
+            <div key={label} className={styles.sessionItem}>
+              <span className={styles.sessionValue}>{value}</span>
+              <span className={styles.sessionKey}>{label}</span>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className={styles.lastSession}>
+      {/* Last Gym — white card */}
+      <div className={styles.card}>
         <div className={styles.sessionLabel}>Last Gym — {lastGym.type}</div>
         <div className={styles.exercises}>
           {lastGym.exercises.map((ex, i) => (
@@ -75,12 +79,13 @@ export default function RunningGymTracker() {
         </div>
       </div>
 
-      <div className={styles.monthly}>
-        <div className={styles.monthlyLabel}>
-          Monthly: {monthlyProgress.currentKm}/{monthlyProgress.goalKm} km
+      {/* Monthly — white card */}
+      <div className={styles.card}>
+        <div className={styles.sessionLabel}>
+          Monthly: {monthlyProgress.currentKm} / {monthlyProgress.goalKm} km
         </div>
-        <div className="progressBar">
-          <div className="progressFill" style={{ width: `${monthlyKmPct}%`, background: 'var(--fire)' }} />
+        <div className={styles.progressTrack}>
+          <div className={styles.progressFill} style={{ width: `${monthlyKmPct}%`, background: '#f59e0b' }} />
         </div>
       </div>
     </div>

@@ -1,49 +1,64 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 }
 
+/* Streak banner — styled for blue bg */
 .streakBanner {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 10px 14px;
-    border: 1px solid rgba(255, 107, 53, 0.2);
-    border-radius: 2px;
-    background: rgba(255, 107, 53, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .flameIcon {
-    color: var(--fire);
+    color: #fb923c;
 }
 
 .streakCount {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--fire);
+    color: #ffffff;
     letter-spacing: 0.05em;
+}
+
+/* White cards */
+.card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .weekStats {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
-.weekStat {
+.cardTop {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 12px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
+    align-items: center;
+    gap: 10px;
 }
 
 .statIcon {
-    color: var(--text-muted);
-    margin-bottom: 4px;
+    color: #9ca3af;
+    flex-shrink: 0;
 }
 
 .statInfo {
@@ -56,25 +71,34 @@
     font-family: var(--font-mono);
     font-size: 1rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #111111;
 }
 
 .statGoal {
     font-family: var(--font-mono);
     font-size: 0.6rem;
-    color: var(--text-muted);
+    color: #9ca3af;
 }
 
-.lastSession {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.progressTrack {
+    width: 100%;
+    height: 5px;
+    background: #e5e7eb;
+    border-radius: 100px;
+    overflow: hidden;
 }
 
+.progressFill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 0.3s ease;
+}
+
+/* Session details inside white cards */
 .sessionLabel {
     font-family: var(--font-mono);
     font-size: 0.6rem;
-    color: var(--text-muted);
+    color: #9ca3af;
     text-transform: uppercase;
     letter-spacing: 0.15em;
 }
@@ -90,24 +114,25 @@
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    padding: 10px 4px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
+    padding: 8px 4px;
+    border: 1px solid #f3f4f6;
+    border-radius: 6px;
+    background: #fafafa;
 }
 
 .sessionValue {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #111111;
 }
 
 .sessionKey {
     font-family: var(--font-mono);
     font-size: 0.5rem;
-    color: var(--text-muted);
+    color: #9ca3af;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
 }
 
 .exercises {
@@ -120,30 +145,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 12px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
+    padding: 7px 10px;
+    border: 1px solid #f3f4f6;
+    border-radius: 6px;
     font-family: var(--font-mono);
     font-size: 0.7rem;
+    background: #fafafa;
 }
 
 .exerciseName {
-    color: var(--text-secondary);
+    color: #374151;
 }
 
 .exerciseDetail {
-    color: var(--accent-light);
+    color: #2b00ff;
     font-weight: 500;
-}
-
-.monthly {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.monthlyLabel {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--text-muted);
 }

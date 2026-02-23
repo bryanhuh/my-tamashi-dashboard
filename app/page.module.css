@@ -97,6 +97,46 @@
   background: #ffffff;
 }
 
+/* ── Grind Section (CurrentlyGrinding + RunningGymTracker) ── */
+.grindSection {
+  width: 100%;
+  background-color: var(--accent);
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+  padding: 48px;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+
+.grindHeader {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.grindIntro {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-style: italic;
+  color: white;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.grindIntroHighlight {
+  color: white;
+  font-style: italic;
+}
+
+.grindSection .section {
+  background: #ffffff;
+}
+
+.grindSection .section:hover {
+  background: #ffffff;
+}
+
 /* ── Individual grid placements ── */
 
 /* ── Spotify Widget (hero top-center, Dynamic Island style) ── */
@@ -163,16 +203,16 @@
   animation-delay: 0.22s;
 }
 
-/* Currently Grinding — narrow left + centre */
+/* Currently Grinding — in grindSection, no mainGrid placement needed */
 .grinding {
-  grid-column: 1 / 3;
-  animation-delay: 0.25s;
+  animation-delay: 0.2s;
+  margin-top: 80px;
+  /* Stagger offset — matches PSN/AniList pattern */
 }
 
-/* Running / Gym — right */
+/* Running / Gym — in grindSection, no mainGrid placement needed */
 .fitness {
-  grid-column: 3 / 4;
-  animation-delay: 0.28s;
+  animation-delay: 0.25s;
 }
 
 /* Full-width bottom sections */
