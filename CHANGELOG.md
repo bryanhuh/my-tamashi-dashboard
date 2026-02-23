@@ -1,5 +1,17 @@
 # Changelog
 
+## [2026-02-23] - Life Roadmap Redesign & Component Cleanup
+
+- **Life Roadmap**: Completely redesigned the `LifeRoadmap` component with a creative alternating zig-zag card layout.
+  - Extracted from the main staggered grid into its own full-width `100vw / min-height: 100vh` section with a white background.
+  - Cards use a blue (`#2b00ff`) background with white borders and white typography, fading in with a smooth `framer-motion` entrance animation.
+  - Year labels use the display serif typeface at large scale for visual impact.
+  - Each card is connected to the next by a unique animated SVG hand-drawn path that draws itself on scroll.
+  - Paths start and end at different corners of each card, cycling through 4 varied curve patterns per alternation side.
+- **Component Cleanup**: Commented out `TaskStreak` and `AgentLogs` components in `app/page.js`.
+- **Roadmap Data**: Updated `data/roadmap.json` with revised milestone entries.
+
+
 ## [2026-02-23] - Gaming Layout & Stylistic Refinements
 - **Gaming & Anime Section**: Grouped PSN Profile and AniList Stats into a new, 100% width `.gamingSection` container.
 - **Staggered Design**: Applied a staggered masonry-style layout to the PSN and AniList components. Added an immersive introduction phrase to the section.

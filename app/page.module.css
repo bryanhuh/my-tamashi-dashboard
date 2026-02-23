@@ -145,10 +145,16 @@
   margin-top: 80px;
 }
 
-/* Life Roadmap — spans centre + right */
-.roadmap {
-  grid-column: 2 / 4;
-  animation-delay: 0.2s;
+/* Life Roadmap Full Screen */
+.roadmapFull {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding: 80px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
 }
 
 /* Task Streak — narrow left */
@@ -231,7 +237,6 @@
     margin: 0;
   }
 
-  .roadmap,
   .streak,
   .grinding,
   .fitness {

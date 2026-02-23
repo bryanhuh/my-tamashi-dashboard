@@ -1,6 +1,14 @@
 [
   {
     "id": 1,
+    "title": "Land a Software Engineering Role",
+    "category": "Career",
+    "status": "in-progress",
+    "year": "2023",
+    "description": "Secure a position at a company working on meaningful products"
+  },
+  {
+    "id": 2,
     "title": "Learn Full-Stack Development",
     "category": "Skills",
     "status": "done",
@@ -8,7 +16,7 @@
     "description": "Master React, Node.js, and modern web technologies"
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Build Personal Projects Portfolio",
     "category": "Career",
     "status": "done",
@@ -16,20 +24,12 @@
     "description": "Ship 5+ meaningful projects that showcase skills"
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "Dive into AI & LLMs",
     "category": "Skills",
     "status": "in-progress",
     "year": "2025",
     "description": "Study agents, MCP, agentic workflows, and build AI-powered tools"
-  },
-  {
-    "id": 4,
-    "title": "Land a Software Engineering Role",
-    "category": "Career",
-    "status": "in-progress",
-    "year": "2025",
-    "description": "Secure a position at a company working on meaningful products"
   },
   {
     "id": 5,
@@ -41,14 +41,6 @@
   },
   {
     "id": 6,
-    "title": "Launch a Tech Blog",
-    "category": "Personal",
-    "status": "in-progress",
-    "year": "2025",
-    "description": "Write about AI agents, coding experiments, and dev life"
-  },
-  {
-    "id": 7,
     "title": "Build a SaaS Product",
     "category": "Career",
     "status": "planned",
@@ -56,19 +48,11 @@
     "description": "Launch an indie product and get first paying customers"
   },
   {
-    "id": 8,
+    "id": 7,
     "title": "Financial Independence Milestone",
     "category": "Financial",
     "status": "planned",
     "year": "2027",
     "description": "Build savings, investments, and passive income streams"
-  },
-  {
-    "id": 9,
-    "title": "Contribute to Open Source",
-    "category": "Skills",
-    "status": "planned",
-    "year": "2026",
-    "description": "Make meaningful contributions to projects I use daily"
   }
 ]

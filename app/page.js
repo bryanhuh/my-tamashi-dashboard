@@ -51,14 +51,15 @@ export default function Home() {
         </div>
       </section>
 
+      <section className={styles.roadmapFull}>
+        <LifeRoadmap />
+      </section>
+
       {/* ── Stagger Grid ── */}
       <div className={styles.mainGrid}>
-        <div className={`${styles.section} ${styles.roadmap}`}>
-          <LifeRoadmap />
-        </div>
-        <div className={`${styles.section} ${styles.streak}`}>
+        {/* <div className={`${styles.section} ${styles.streak}`}>
           <TaskStreak />
-        </div>
+        </div> */}
         <div className={`${styles.section} ${styles.grinding}`}>
           <CurrentlyGrinding />
         </div>
@@ -68,9 +69,9 @@ export default function Home() {
         <div className={`${styles.section} ${styles.blog}`}>
           <BlogPosts />
         </div>
-        <div className={`${styles.section} ${styles.logs}`}>
+        {/* <div className={`${styles.section} ${styles.logs}`}>
           <AgentLogs />
-        </div>
+        </div> */}
         <div className={`${styles.section} ${styles.coffee}`}>
           <BuyMeACoffee />
         </div>

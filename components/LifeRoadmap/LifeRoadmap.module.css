@@ -1,90 +1,140 @@
 .container {
+    width: 100%;
+    /* Align with other sections by utilizing full available width minus page padding */
+    margin: 0 auto;
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 16px;
 }
 
 .timeline {
-    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    /* Wider timeline to match content spread */
     display: flex;
     flex-direction: column;
-    gap: 0;
-    padding-left: 24px;
+    margin: 60px auto 40px;
+    overflow: visible;
 }
 
-.line {
-    position: absolute;
-    left: 7px;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: var(--border);
-}
-
-.milestone {
+.itemWrapper {
+    width: 100%;
     position: relative;
-    padding: 12px 0 12px 20px;
-    animation: fadeInUp 0.5s var(--ease-out) both;
+    overflow: visible;
+    /* No negative margin here — the SVG connector provides the visual bridge */
 }
 
-.dot {
-    position: absolute;
-    left: -24px;
-    top: 18px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-    background: var(--bg-base);
-    z-index: 1;
+.itemWrapper:not(:first-child) {
+    /* Pull each item up so the connector SVG overlaps naturally between staggered cards */
+    margin-top: -80px;
 }
 
-.done .dot {
-    background: var(--accent);
+.box {
+    width: calc(50% - 40px);
+    border-width: 2px;
+    border-style: solid;
+    border-color: #ffffff;
+    border-radius: 12px;
+    padding: 28px;
+    background-color: #2b00ff;
+    position: relative;
+    box-shadow: 4px 6px 0px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 2;
 }
 
-.in-progress .dot {
-    animation: pulse 2s ease-in-out infinite;
+.box:hover {
+    transform: translateY(-4px);
+    box-shadow: 4px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
-.content {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.boxLeft {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.boxRight {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+/* Typography — colors animated by Framer Motion */
+.year {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 12px;
+    display: block;
 }
 
 .meta {
     display: flex;
+    gap: 12px;
     align-items: center;
-    gap: 8px;
+    margin-bottom: 20px;
 }
 
-.year {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--accent);
-    font-weight: 500;
-    letter-spacing: 0.1em;
-}
-
-.status {
-    font-size: 0.75rem;
+.statusIcon {
+    font-size: 1.2rem;
 }
 
 .title {
     font-family: var(--font-display);
-    font-size: 0.85rem;
+    font-size: 1.35rem;
     font-weight: 600;
-    color: var(--text-primary);
-}
-
-.planned .title {
-    color: var(--text-secondary);
+    color: #ffffff;
+    margin-bottom: 12px;
 }
 
 .description {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    line-height: 1.5;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+}
+
+/* Connector — rendered in-flow between cards so it never gets clipped */
+.connector {
+    display: block;
+    width: 100%;
+    height: 160px;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+    /* Pull up into the stagger gap so it looks connected */
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+.svgPath {
+    fill: none;
+    stroke: #000000;
+    stroke-width: 2.5px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+@media (max-width: 768px) {
+    .timeline {
+        margin: 20px auto;
+        padding: 0 16px;
+    }
+
+    .box {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .itemWrapper:not(:first-child) {
+        margin-top: 24px;
+    }
+
+    .connector {
+        display: none;
+    }
 }
