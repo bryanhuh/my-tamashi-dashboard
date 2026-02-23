@@ -13,11 +13,7 @@ export default function RunningGymTracker() {
     <div className={styles.container}>
       <div className="sectionIndex">10 — Fitness</div>
 
-      {/* Streak banner */}
-      <div className={styles.streakBanner}>
-        <Flame size={16} className={styles.flameIcon} />
-        <span className={styles.streakCount}>{workoutStreak} day streak</span>
-      </div>
+
 
       {/* Weekly stats — white cards */}
       <div className={styles.weekStats}>

@@ -47,9 +47,9 @@
     z-index: 20;
     display: flex;
     flex-direction: column;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
     overflow: hidden;
     flex-shrink: 0;
 }
@@ -62,10 +62,10 @@
     font-family: var(--font-serif);
     font-size: 0.98rem;
     font-style: italic;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.5);
     background: transparent;
     border: none;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease;
     white-space: nowrap;
@@ -76,14 +76,13 @@
 }
 
 .filterItem:hover {
-    background: #e0e8ff;
-    /* light blue */
-    color: var(--accent);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
 }
 
 .filterActive {
     color: #ffffff !important;
-    background: black !important;
+    background: rgba(255, 255, 255, 0.15) !important;
     font-weight: 600;
 }
 

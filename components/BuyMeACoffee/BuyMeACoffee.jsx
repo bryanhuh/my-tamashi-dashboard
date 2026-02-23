@@ -13,7 +13,7 @@ export default function BuyMeACoffee() {
           </p>
         </div>
         <a
-          href="#"
+          href="https://buymeacoffee.com/bryanhuh"
           className={styles.button}
           target="_blank"
           rel="noopener noreferrer"
@@ -22,7 +22,7 @@ export default function BuyMeACoffee() {
           <span>Buy Me a Coffee</span>
           <Heart size={12} className={styles.heart} />
         </a>
-        <span className={styles.hint}>BuyMeACoffee link coming soon</span>
+
       </div>
     </div>
   );
