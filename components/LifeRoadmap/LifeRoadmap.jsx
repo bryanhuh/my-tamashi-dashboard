@@ -25,17 +25,17 @@ const characterImages = [
 
 // Simple fade-in only — colors are static in CSS
 const boxVariants = {
-  hidden:  { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 const imageVariants = {
-  hidden:  { opacity: 0, x: 30 },
+  hidden: { opacity: 0, x: 30 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.15 } },
 };
 
 // Varied SVG paths — all in a 0–100 × 0–100 viewBox.
-const leftPaths  = [
+const leftPaths = [
   'M 46,0 C 50,40 50,60 54,100',
   'M 5,0  C 20,80 80,20 95,100',
   'M 46,0 C 80,30 20,70 54,100',
@@ -196,16 +196,9 @@ export default function LifeRoadmap() {
                   viewport={{ once: true, margin: '-15%' }}
                   className={styles.box}
                 >
-                  <span className={styles.year}>{item.year}</span>
-
-                  <div className={styles.meta}>
+                  <div className={styles.yearRow}>
+                    <span className={styles.year}>{item.year}</span>
                     <span className={styles.statusIcon}>{statusIcons[item.status]}</span>
-                    <span
-                      className="tag"
-                      style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(255,255,255,0.4)', color: '#fff', backgroundColor: 'rgba(255,255,255,0.1)' }}
-                    >
-                      {item.category}
-                    </span>
                   </div>
 
                   <h4 className={styles.title}>{item.title}</h4>

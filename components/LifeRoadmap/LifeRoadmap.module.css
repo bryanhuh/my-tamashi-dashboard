@@ -145,13 +145,19 @@
 }
 
 /* ── Typography ── */
+.yearRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
 .year {
     font-family: var(--font-serif);
     font-size: 3.5rem;
     font-weight: 300;
     color: #ffffff;
     line-height: 1;
-    margin-bottom: 12px;
     display: block;
 }
 
@@ -163,7 +169,8 @@
 }
 
 .statusIcon {
-    font-size: 1.2rem;
+    font-size: 2rem;
+    /* make icon a bit bigger to match the huge year font */
 }
 
 .title {
