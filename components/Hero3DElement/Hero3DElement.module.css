@@ -1,0 +1,38 @@
+.container {
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    /* Slightly offset from center */
+    transform: translate(-50%, -50%);
+    width: 60vh;
+    height: 60vh;
+    max-width: 600px;
+    max-height: 600px;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    /* Above particles, below text */
+    opacity: 0;
+    animation: slowFadeIn 3s ease-in-out forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    filter: drop-shadow(0 0 20px rgba(43, 0, 255, 0.3));
+}
+
+@keyframes slowFadeIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.9);
+    }
+
+    100% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
