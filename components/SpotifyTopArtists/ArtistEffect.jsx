@@ -18,13 +18,13 @@ export default function ArtistEffect() {
 
     // We want a transparent background to overlay on the UI
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    
+
     // Set internal render resolution higher than CSS container
     const width = 450;
     const height = 450;
-    renderer.setSize(width, height); 
+    renderer.setSize(width, height);
     renderer.setPixelRatio(window.devicePixelRatio);
-    
+
     // Scale canvas down via CSS to fit container exactly
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = 'auto';
@@ -42,7 +42,7 @@ export default function ArtistEffect() {
 
       // Geometry matches the orthogonal camera bounds
       geometry = new THREE.PlaneGeometry(2, 2);
-      
+
       material = new THREE.ShaderMaterial({
         transparent: true,
         uniforms: {
@@ -97,8 +97,8 @@ export default function ArtistEffect() {
               
               float particleNoise = n1 * 0.5 + n2 * 0.5;
               
-              // Core blue / purple aesthetic
-              vec3 particleColor = vec3(0.05, 0.2, 0.85); // deep bright blue
+              // Accent blue aesthetic
+              vec3 particleColor = vec3(0.17, 0.45, 1.0); // accent blue
               vec4 finalColor = tex;
               
               if (effectMask > 0.0) {
@@ -126,7 +126,7 @@ export default function ArtistEffect() {
               
               // Slightly crush contrast & tint to match the multiply-blend mood
               float lum = dot(finalColor.rgb, vec3(0.299, 0.587, 0.114));
-              vec3 tinted = mix(finalColor.rgb, vec3(0.15, 0.15, 0.6) * lum, 0.4);
+              vec3 tinted = mix(finalColor.rgb, vec3(0.17, 0.35, 0.9) * lum, 0.35);
               finalColor.rgb = tinted;
               
               // Drop manual premultiply to avoid dark fringing/invisibility in WebGL

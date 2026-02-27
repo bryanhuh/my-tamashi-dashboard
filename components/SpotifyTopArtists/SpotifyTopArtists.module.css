@@ -1,5 +1,6 @@
 /* ── Outer shell ── */
 .container {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -10,12 +11,18 @@
 
 /* ── Header row ── */
 .header {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     gap: 24px;
+    background: var(--accent);
+    width: 100%;
+    padding: 20px 24px;
+    box-sizing: border-box;
 }
 
 /* ── Intro copy ── */
@@ -29,7 +36,7 @@
     font-size: 1.5rem;
     font-weight: 400;
     font-style: italic;
-    color: #111;
+    color: #fff;
     line-height: 1.4;
     letter-spacing: -0.01em;
 }
@@ -111,51 +118,27 @@
     opacity: 0.12;
 }
 
-/* ── Canvas background ── */
-.canvas {
+/* ── World Map Background ── */
+.worldMapContainer {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
-}
-
-/* ── ASCII Overlay ── */
-.asciiOverlay {
-    position: absolute;
-    inset: 0;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
-
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.62rem;
-    line-height: 1.18;
-    letter-spacing: 0.04em;
-
-    /* Soft cobalt blue text, sitting behind stars */
-    color: var(--accent);
-    opacity: 0.22;
-
-    pointer-events: none;
-    user-select: none;
-    white-space: pre;
-    overflow: hidden;
-    z-index: 1;
-
-    animation: globeFadeIn 1.5s ease both;
+    animation: fadeIn 1.5s ease both;
 }
 
-@keyframes globeFadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 0.22;
-    }
+.worldMapSvg {
+    position: absolute;
+    width: 105%;
+    height: 105%;
+    object-fit: contain;
+    filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.05));
+    transform: translateY(2%);
 }
 
 /* ── Artist Image Corner Overlay ── */
@@ -168,127 +151,29 @@
     pointer-events: none;
     user-select: none;
     animation: globeFadeIn 1.5s ease both;
-    opacity: 0.85;
+    opacity: 1;
 }
 
-/* ── SVG connection lines ── */
-.linesSvg {
-    position: absolute;
-    inset: 0;
+
+
+/* ── Artist Map Pins ── */
+.star {
+    position: relative;
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.connectionLine {
-    animation: dashDraw 0.35s ease forwards;
-}
-
-@keyframes dashDraw {
-    from {
-        opacity: 0;
-        stroke-dashoffset: 60;
-    }
-
-    to {
-        opacity: 1;
-        stroke-dashoffset: 0;
-    }
-}
-
-/* ── Central identity node ── */
-.central {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 48px;
-    height: 48px;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.centralRing1,
-.centralRing2 {
-    position: absolute;
-    inset: 0;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    animation: centralPulse 3s ease-in-out infinite;
-}
-
-.centralRing2 {
-    inset: -12px;
-    border-color: rgba(255, 255, 255, 0.2);
-    animation-delay: 1.5s;
-}
-
-@keyframes centralPulse {
-
-    0%,
-    100% {
-        opacity: 0.8;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 0.3;
-        transform: scale(1.18);
-    }
-}
-
-.centralCore {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
-    border: 1px solid rgba(255, 255, 255, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    color: var(--accent);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.8);
-    z-index: 1;
-}
-
-/* ── Artist star nodes ── */
-.star {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    overflow: visible;
-    /* let label overflow */
+    background: transparent;
+    border: none;
+    padding: 0;
     cursor: pointer;
-    text-decoration: none;
     z-index: 4;
-
-    /* Floating animation driven by CSS custom props */
-    animation: starFloat var(--float-dur, 3.5s) ease-in-out infinite var(--float-delay, 0s);
-    transition: transform 0.25s var(--ease-out), z-index 0s;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0s;
 }
 
 .star:hover,
 .starHovered {
-    transform: translate(-50%, calc(-50% - 15px)) scale(1.25) !important;
-    animation-play-state: paused;
-    /* Pause float so hover scale is stable */
-    z-index: 20;
-}
-
-@keyframes starFloat {
-
-    0%,
-    100% {
-        transform: translate(-50%, -50%) translateY(0px);
-    }
-
-    50% {
-        transform: translate(-50%, -50%) translateY(-7px);
-    }
+    transform: translateY(-8px) scale(1.1) !important;
+    z-index: 20 !important;
 }
 
 /* Photo fills the circle */
@@ -298,15 +183,7 @@
     object-fit: cover;
     border-radius: 50%;
     display: block;
-    filter: grayscale(30%) brightness(0.8);
-    transition: filter 0.25s ease;
-    border: 3px solid #ffffff;
     box-sizing: border-box;
-}
-
-.star:hover .starImg,
-.starHovered .starImg {
-    filter: grayscale(0%) brightness(1);
 }
 
 /* Placeholder */
@@ -314,55 +191,43 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: rgba(29, 185, 84, 0.08);
+    background: #e8e8e8;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(29, 185, 84, 0.5);
+    color: #999;
 }
 
-/* Glowing ring around each star */
+/* Map pin outer white ring */
 .starRing {
     position: absolute;
     inset: -3px;
     border-radius: 50%;
-    border: 1px solid rgba(180, 210, 255, 0.18);
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    border: 3px solid #ffffff;
+    /* solid white border matching mockup */
+    background: transparent;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     pointer-events: none;
+    transition: box-shadow 0.2s ease;
 }
 
 /* Map pin pointer tail */
 .starRing::after {
     content: '';
     position: absolute;
-    bottom: -9px;
+    bottom: -8px;
     left: 50%;
     transform: translateX(-50%);
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 8px solid rgba(180, 210, 255, 0.18);
-    transition: border-top-color 0.25s ease;
+    border-top: 8px solid #ffffff;
+    /* solid white tail */
     pointer-events: none;
 }
 
 .starHovered .starRing,
 .star:hover .starRing {
-    border-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 14px rgba(255, 255, 255, 0.5), 0 0 28px rgba(255, 255, 255, 0.2);
-}
-
-.starHovered .starRing::after,
-.star:hover .starRing::after {
-    border-top-color: rgba(255, 255, 255, 0.9);
-}
-
-.starConnected .starRing {
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
-}
-
-.starConnected .starRing::after {
-    border-top-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 /* Hover info label — floats below star */
