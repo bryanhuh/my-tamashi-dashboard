@@ -15,6 +15,8 @@ import AgentLogs from '@/components/AgentLogs/AgentLogs';
 import RunningGymTracker from '@/components/RunningGymTracker/RunningGymTracker';
 import BuyMeACoffee from '@/components/BuyMeACoffee/BuyMeACoffee';
 import ASCIIGlobe from '@/components/ASCIIGlobe/ASCIIGlobe';
+import HeroParticles from '@/components/HeroParticles/HeroParticles';
+import Hero3DElement from '@/components/Hero3DElement/Hero3DElement';
 
 export default function Home() {
   return (
@@ -23,7 +25,10 @@ export default function Home() {
 
       {/* ── Hero: Clock + Quote ── */}
       <section className={styles.hero}>
+        <HeroParticles />
         <ASCIIGlobe />
+        <Hero3DElement />
+
         <DigitalClock />
         <QuoteOfTheDay />
         <div className={styles.spotifyWidget}>
