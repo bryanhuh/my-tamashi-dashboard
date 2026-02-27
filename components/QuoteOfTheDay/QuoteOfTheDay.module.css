@@ -1,9 +1,17 @@
+.quoteContainer {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .quote {
     text-align: center;
-    padding: 8px 0;
+    padding: 0;
     animation: fadeIn 1.5s var(--ease-out);
     max-width: 600px;
-    margin: 0 auto;
 }
 
 .text {
@@ -23,4 +31,73 @@
     color: var(--text-muted);
     letter-spacing: 0.15em;
     text-transform: uppercase;
+}
+
+/* ── Quick Stats Ribbon ── */
+.statsRibbon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+    animation: fadeIn 2s var(--ease-out);
+    opacity: 0.8;
+}
+
+.statItem {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+}
+
+.statDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px currentColor;
+}
+
+.statDivider {
+    width: 2px;
+    height: 2px;
+    background: var(--border);
+    border-radius: 50%;
+}
+
+/* ── Scroll Indicator ── */
+.scrollIndicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeIn 2.5s var(--ease-out);
+}
+
+.scrollDown {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--text-muted);
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(8px);
+    }
 }

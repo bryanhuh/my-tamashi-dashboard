@@ -36,9 +36,34 @@ export default function QuoteOfTheDay() {
   if (!quote) return null;
 
   return (
-    <div className={styles.quote}>
-      <p className={styles.text}>&ldquo;{quote.text}&rdquo;</p>
-      <span className={styles.author}>— {quote.author}</span>
+    <div className={styles.quoteContainer}>
+      <div className={styles.quote}>
+        <p className={styles.text}>&ldquo;{quote.text}&rdquo;</p>
+        <span className={styles.author}>— {quote.author}</span>
+      </div>
+
+      {/* ── Quick Stats Ribbon ── */}
+      <div className={styles.statsRibbon}>
+        <div className={styles.statItem}>
+          <span className={styles.statDot} style={{ backgroundColor: 'var(--spotify)' }}></span>
+          !spotify
+        </div>
+        <div className={styles.statDivider}></div>
+        <div className={styles.statItem}>
+          <span className={styles.statDot} style={{ backgroundColor: 'var(--psn)' }}></span>
+          Platinum Hunter
+        </div>
+        <div className={styles.statDivider}></div>
+        <div className={styles.statItem}>
+          <span className={styles.statDot} style={{ backgroundColor: 'var(--anilist)' }}></span>
+          Anime
+        </div>
+      </div>
+
+      {/* ── Scroll Indicator ── */}
+      <div className={styles.scrollIndicator}>
+        <span className={styles.scrollDown}>↓</span>
+      </div>
     </div>
   );
 }

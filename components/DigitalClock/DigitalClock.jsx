@@ -17,24 +17,27 @@ export default function DigitalClock() {
 
   const hours = time.getHours();
   const greeting = hours < 12 ? 'Good morning' : hours < 18 ? 'Good afternoon' : 'Good evening';
-  
-  const timeStr = time.toLocaleTimeString('en-US', { 
-    hour: '2-digit', 
-    minute: '2-digit', 
-    second: '2-digit', 
-    hour12: false 
+
+  const timeStr = time.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
   });
 
-  const dateStr = time.toLocaleDateString('en-US', { 
-    weekday: 'long', 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
+  const dateStr = time.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
   });
 
   return (
     <div className={styles.clock}>
-      <div className={styles.greeting}>{greeting}, Bryan</div>
+      <div className={styles.greetingHeader}>
+        <div className={styles.greeting}>{greeting}, Bryan</div>
+        <div className={styles.tagline}>Developer &middot; Gamer &middot; Japanophile</div>
+      </div>
       <div className={styles.time}>
         {timeStr.split('').map((char, i) => (
           <span key={i} className={char === ':' ? styles.colon : styles.digit}>
